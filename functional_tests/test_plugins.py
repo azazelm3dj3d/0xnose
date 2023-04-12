@@ -1,8 +1,8 @@
 import os
 import sys
 import unittest
-from nose.config import Config
-from nose.core import TestProgram
+from xnose.config import Config
+from xnose.core import TestProgram
 
 here = os.path.abspath(os.path.dirname(__file__))
 support = os.path.join(here, 'support')
@@ -23,7 +23,7 @@ class TestPluginCalls(unittest.TestCase):
         conf = Config(plugins=man, stream=sys.stdout)
         t = TestProgram(defaultTest=wdir, config=conf,
                         argv=['test_plugin_calls_package1'], exit=False)
-        print man.calls()
+        print(man.calls())
         assert man.called
 
         self.assertEqual(
@@ -47,7 +47,7 @@ class TestPluginCalls(unittest.TestCase):
         conf = Config(plugins=man, stream=sys.stdout)
         t = TestProgram(defaultTest=wdir, config=conf,
                         argv=['test_plugin_calls_package1', '-v'], exit=False)
-        print man.calls()
+        print(man.calls())
         assert man.called
 
         self.assertEqual(

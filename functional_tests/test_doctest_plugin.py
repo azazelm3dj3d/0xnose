@@ -1,7 +1,7 @@
 import os
 import unittest
-from nose.plugins.doctests import Doctest
-from nose.plugins import PluginTester
+from xnose.plugins.doctests import Doctest
+from xnose.plugins import PluginTester
 
 support = os.path.join(os.path.dirname(__file__), 'support')
 
@@ -12,7 +12,7 @@ class TestDoctestPlugin(PluginTester, unittest.TestCase):
     suitepath = os.path.join(support, 'dtt')
     
     def runTest(self):
-        print str(self.output)
+        print(str(self.output))
         
         assert 'Doctest: some_mod ... ok' in self.output
         assert 'Doctest: some_mod.foo ... ok' in self.output
@@ -27,7 +27,7 @@ class TestDoctestFiles(PluginTester, unittest.TestCase):
     suitepath = os.path.join(support, 'dtt', 'docs')
     
     def runTest(self):
-        print str(self.output)
+        print(str(self.output))
 
         expect = [
             'Doctest: doc.txt ... ok',

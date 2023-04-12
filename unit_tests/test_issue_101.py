@@ -1,8 +1,8 @@
 import sys
 import unittest
 import warnings
-from nose.plugins.errorclass import ErrorClass, ErrorClassPlugin
-from nose.exc import SkipTest
+from xnose.plugins.errorclass import ErrorClass, ErrorClassPlugin
+from xnose.exc import SkipTest
 
 class TestErrorClassWithStringException(unittest.TestCase):
 

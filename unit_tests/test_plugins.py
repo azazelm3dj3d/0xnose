@@ -2,20 +2,20 @@ import logging
 import os
 import sys
 import unittest
-import nose.plugins
+import xnose.plugins
 from optparse import OptionParser
 import tempfile
 from warnings import warn, filterwarnings, resetwarnings
 
-from nose import SkipTest
-from nose.pyversion import unbound_method
-from nose.config import Config
-from nose.plugins.attrib import AttributeSelector
-from nose.plugins.base import Plugin
-from nose.plugins.cover import Coverage
-from nose.plugins.doctests import Doctest
-from nose.plugins.failuredetail import FailureDetail
-from nose.plugins.prof import Profile
+from xnose import SkipTest
+from xnose.pyversion import unbound_method
+from xnose.config import Config
+from xnose.plugins.attrib import AttributeSelector
+from xnose.plugins.base import Plugin
+from xnose.plugins.cover import Coverage
+from xnose.plugins.doctests import Doctest
+from xnose.plugins.failuredetail import FailureDetail
+from xnose.plugins.prof import Profile
 
 from mock import *
 
@@ -99,16 +99,16 @@ class TestDoctestPlugin(unittest.TestCase):
         dtp.add_options(parser, env)
         options, args = parser.parse_args(argv)
         
-        print options
-        print args
+        print(options)
+        print(args)
         self.assertEqual(options.doctestExtension, ['ext', 'txt'])
 
         env = {}
         parser = OptionParser()
         dtp.add_options(parser, env)
         options, args = parser.parse_args(argv)
-        print options
-        print args
+        print(options)
+        print(args)
         self.assertEqual(options.doctestExtension, ['txt'])
             
     def test_want_file(self):
@@ -171,12 +171,12 @@ class TestDoctestPlugin(unittest.TestCase):
         plug.configure(opt, conf)
         suite = plug.loadTestsFromModule(foo.bar.buz)
         for test in suite:
-            print test.address()
+            print(test.address())
             file, mod, call = test.address()
             self.assertEqual(mod, 'foo.bar.buz')
             self.assertEqual(call, None)
             for case in test:
-                print case.address()
+                print(case.address())
                 file, mod, call = case.address()
                 self.assertEqual(mod, 'foo.bar.buz')
                 self.assertEqual(call, 'afunc')
@@ -198,7 +198,7 @@ class TestDoctestPlugin(unittest.TestCase):
             assert test.address(), "Test %s has no address"
         
     def test_collect_no_collect(self):
-        # bug http://nose.python-hosting.com/ticket/55 
+        # bug http://xnose.python-hosting.com/ticket/55 
         # we got "iteration over non-sequence" when no files match
         here = os.path.abspath(os.path.dirname(__file__))
         support = os.path.join(here, 'support')
@@ -334,7 +334,7 @@ class TestAttribPlugin(unittest.TestCase):
         # OR
         opt, args = parser.parse_args(['test', '-a', 'tags=a',
                                        '-a', 'tags=b'])
-        print opt
+        print(opt)
         plug.configure(opt, cnf)
 
         assert plug.wantFunction(f1) is None
@@ -344,7 +344,7 @@ class TestAttribPlugin(unittest.TestCase):
 
         # AND
         opt, args = parser.parse_args(['test', '-a', 'tags=a,tags=b'])
-        print opt
+        print(opt)
         plug.configure(opt, cnf)
 
         assert plug.wantFunction(f1) is None

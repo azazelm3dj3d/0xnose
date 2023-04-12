@@ -2,9 +2,9 @@ import os
 import sys
 import unittest
 
-from nose.plugins import PluginTester
-from nose.plugins.builtin import Deprecated, Skip
-from nose.plugins.skip import SkipTest
+from xnose.plugins import PluginTester
+from xnose.plugins.builtin import Deprecated, Skip
+from xnose.plugins.skip import SkipTest
 
 
 support = os.path.join(os.path.dirname(__file__), 'support')
@@ -22,9 +22,9 @@ class TestStringException(PluginTester, unittest.TestCase):
                            "version of Python")
 
         print
-        print '!' * 70
-        print str(self.output)
-        print '!' * 70
+        print('!' * 70)
+        print(str(self.output))
+        print('!' * 70)
         print
         assert 'raise "string exception"' in str(self.output)
         assert 'raise "string exception in setup"' in str(self.output)

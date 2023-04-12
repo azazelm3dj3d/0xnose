@@ -6,11 +6,11 @@ import re
 import unittest
 from xml.sax import saxutils
 
-from nose.pyversion import UNICODE_STRINGS
-from nose.tools import eq_
-from nose.plugins.xunit import Xunit, escape_cdata, id_split, Tee
-from nose.exc import SkipTest
-from nose.config import Config
+from xnose.pyversion import UNICODE_STRINGS
+from xnose.tools import eq_
+from xnose.plugins.xunit import Xunit, escape_cdata, id_split, Tee
+from xnose.exc import SkipTest
+from xnose.config import Config
 
 def mktest():
     class TC(unittest.TestCase):
@@ -52,7 +52,7 @@ class TestOptions(unittest.TestCase):
         x = Xunit()
         x.add_options(parser, env={})
         (options, args) = parser.parse_args([])
-        eq_(options.xunit_file, "nosetests.xml")
+        eq_(options.xunit_file, "xnosetests.xml")
 
     def test_file_from_environ(self):
         parser = optparse.OptionParser()
@@ -90,7 +90,7 @@ class TestTee(unittest.TestCase):
         l = Log(DEBUG)
         try:
             l.warn('Test')
-        except Exception, e:
+        except Exception as e:
             self.fail(
                 "Exception raised while writing to distutils.log: %s" % (e,))
 
@@ -152,7 +152,7 @@ class TestXMLOutputWithXMLAndPrefix(BaseTestXMLOutputWithXML):
         self.x.addSuccess(test, (None,None,None))
 
         result = self.get_xml_report()
-        print result
+        print(result)
 
         if self.ET:
             tree = self.ET.fromstring(result)
@@ -169,7 +169,7 @@ class TestXMLOutputWithXMLAndPrefix(BaseTestXMLOutputWithXML):
             "--xunit-prefix-with-testsuite-name"
         ])
 
-        self._assert_testcase_classname('nosetests.test_xunit.TC')
+        self._assert_testcase_classname('xnosetests.test_xunit.TC')
 
     def test_addSuccess_custom(self):
         custom_testsuite_name = 'eartest'
@@ -203,11 +203,11 @@ class TestXMLOutputWithXML(BaseTestXMLOutputWithXML):
         self.x.addFailure(test, some_err)
 
         result = self.get_xml_report()
-        print result
+        print(result)
 
         if self.ET:
             tree = self.ET.fromstring(result)
-            eq_(tree.attrib['name'], "nosetests")
+            eq_(tree.attrib['name'], "xnosetests")
             eq_(tree.attrib['tests'], "1")
             eq_(tree.attrib['errors'], "0")
             eq_(tree.attrib['failures'], "1")
@@ -228,7 +228,7 @@ class TestXMLOutputWithXML(BaseTestXMLOutputWithXML):
         else:
             # this is a dumb test for 2.4-
             assert '<?xml version="1.0" encoding="UTF-8"?>' in result
-            assert '<testsuite name="nosetests" tests="1" errors="0" failures="1" skip="0">' in result
+            assert '<testsuite name="xnosetests" tests="1" errors="0" failures="1" skip="0">' in result
             assert '<testcase classname="test_xunit.TC" name="runTest"' in result
             assert '<failure type="exceptions.AssertionError"' in result
             assert "AssertionError: one is not 'equal' to two" in result
@@ -246,7 +246,7 @@ class TestXMLOutputWithXML(BaseTestXMLOutputWithXML):
         self.x.addFailure(test, some_err)
 
         result = self.get_xml_report()
-        print result
+        print(result)
 
         if self.ET:
             tree = self.ET.fromstring(result)
@@ -270,11 +270,11 @@ class TestXMLOutputWithXML(BaseTestXMLOutputWithXML):
         self.x.addError(test, some_err)
 
         result = self.get_xml_report()
-        print result
+        print(result)
 
         if self.ET:
             tree = self.ET.fromstring(result)
-            eq_(tree.attrib['name'], "nosetests")
+            eq_(tree.attrib['name'], "xnosetests")
             eq_(tree.attrib['tests'], "1")
             eq_(tree.attrib['errors'], "1")
             eq_(tree.attrib['failures'], "0")
@@ -295,14 +295,14 @@ class TestXMLOutputWithXML(BaseTestXMLOutputWithXML):
         else:
             # this is a dumb test for 2.4-
             assert '<?xml version="1.0" encoding="UTF-8"?>' in result
-            assert '<testsuite name="nosetests" tests="1" errors="1" failures="0" skip="0">' in result
+            assert '<testsuite name="xnosetests" tests="1" errors="1" failures="0" skip="0">' in result
             assert '<testcase classname="test_xunit.TC" name="runTest"' in result
             assert '<error type="exceptions.RuntimeError"' in result
             assert 'RuntimeError: some error happened' in result
             assert '</error></testcase></testsuite>' in result
 
     def test_non_utf8_error(self):
-        # See http://code.google.com/p/python-nose/issues/detail?id=395
+        # See http://code.google.com/p/python-xnose/issues/detail?id=395
         test = mktest()
         self.x.beforeTest(test)
         try:
@@ -311,11 +311,13 @@ class TestXMLOutputWithXML(BaseTestXMLOutputWithXML):
             some_err = sys.exc_info()
         self.x.addError(test, some_err)
         result = self.get_xml_report()
-        print repr(result)
+        print(repr(result))
+        
         if self.ET:
             tree = self.ET.fromstring(result)
             tc = tree.find("testcase")
             err = tc.find("error")
+            
             if UNICODE_STRINGS:
                 eq_(err.attrib['message'],
                     '\x80')
@@ -340,7 +342,7 @@ class TestXMLOutputWithXML(BaseTestXMLOutputWithXML):
         self.x.addError(test, some_err)
 
         result = self.get_xml_report()
-        print result
+        print(result)
 
         if self.ET:
             tree = self.ET.fromstring(result)
@@ -359,11 +361,11 @@ class TestXMLOutputWithXML(BaseTestXMLOutputWithXML):
         self.x.addSuccess(test, (None,None,None))
 
         result = self.get_xml_report()
-        print result
+        print(result)
 
         if self.ET:
             tree = self.ET.fromstring(result)
-            eq_(tree.attrib['name'], "nosetests")
+            eq_(tree.attrib['name'], "xnosetests")
             eq_(tree.attrib['tests'], "1")
             eq_(tree.attrib['errors'], "0")
             eq_(tree.attrib['failures'], "0")
@@ -377,7 +379,7 @@ class TestXMLOutputWithXML(BaseTestXMLOutputWithXML):
         else:
             # this is a dumb test for 2.4-
             assert '<?xml version="1.0" encoding="UTF-8"?>' in result
-            assert '<testsuite name="nosetests" tests="1" errors="0" failures="0" skip="0">' in result
+            assert '<testsuite name="xnosetests" tests="1" errors="0" failures="0" skip="0">' in result
             assert '<testcase classname="test_xunit.TC" name="runTest"' in result
             assert '</testsuite>' in result
 
@@ -388,7 +390,7 @@ class TestXMLOutputWithXML(BaseTestXMLOutputWithXML):
         self.x.addSuccess(test, (None,None,None))
 
         result = self.get_xml_report()
-        print result
+        print(result)
 
         if self.ET:
             tree = self.ET.fromstring(result)

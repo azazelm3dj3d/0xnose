@@ -2,10 +2,15 @@ import os
 import sys
 import unittest
 import warnings
-from cStringIO import StringIO
-from nose.result import _TextTestResult
+# from cStringIO import StringIO
+from xnose.result import _TextTestResult
 here = os.path.dirname(__file__)
 support = os.path.join(here, 'support')
+
+try:
+  from StringIO import StringIO
+except ImportError:
+  from io import StringIO
 
 
 class TestRunner(unittest.TextTestRunner):
@@ -26,13 +31,13 @@ class TestNoseTestCollector(unittest.TestCase):
         # we don't need to see our own warnings
         warnings.filterwarnings(action='ignore',
                                 category=RuntimeWarning,
-                                module='nose.plugins.manager')
+                                module='xnose.plugins.manager')
 
         try:
             os.chdir(os.path.join(support, 'issue038'))
             unittest.TestProgram(
                 None, None,
-                argv=['test_collector', '-v', 'nose.collector'],
+                argv=['test_collector', '-v', 'xnose.collector'],
                 testRunner=runner)
         except SystemExit:
             pass

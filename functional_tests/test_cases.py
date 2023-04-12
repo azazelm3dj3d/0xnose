@@ -1,7 +1,7 @@
 import unittest
-from nose.config import Config
-from nose import case
-from nose.plugins import Plugin, PluginManager
+from xnose.config import Config
+from xnose import case
+from xnose.plugins import Plugin, PluginManager
 
 class TestTestCasePluginCalls(unittest.TestCase):
 

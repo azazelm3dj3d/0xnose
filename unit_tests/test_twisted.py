@@ -1,6 +1,7 @@
-from nose.exc import SkipTest
-from nose.tools import *
-from nose.twistedtools import *
+import sys
+from xnose.exc import SkipTest
+from xnose.tools import *
+from xnose.twistedtools import *
 try:    
     from twisted.internet.defer import Deferred
     from twisted.internet.error import DNSLookupError
@@ -29,7 +30,8 @@ test_resolve = deferred()(test_resolve)
 #@raises(TypeError)
 #@deferred()
 def test_raises_bad_return():
-    print reactor
+    print(reactor)
+        
     reactor.resolve("www.python.org")
 test_raises_bad_return = raises(TypeError)(deferred()(test_raises_bad_return))
 
@@ -89,5 +91,5 @@ test_timeout_expired = raises(TimeExpired)(
 
 
 if __name__ == '__main__':
-    from nose import runmodule
+    from xnose import runmodule
     runmodule()

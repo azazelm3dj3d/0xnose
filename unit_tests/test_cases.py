@@ -1,10 +1,10 @@
 import unittest
 import pdb
 import sys
-import nose.case
-import nose.failure
-from nose.pyversion import unbound_method
-from nose.config import Config
+import xnose.case
+import xnose.failure
+from xnose.pyversion import unbound_method
+from xnose.config import Config
 from mock import ResultProxyFactory, ResultProxy
 
 class TestNoseCases(unittest.TestCase):
@@ -16,7 +16,7 @@ class TestNoseCases(unittest.TestCase):
         def func(a=a):
             a.append(1)
 
-        case = nose.case.FunctionTestCase(func)
+        case = xnose.case.FunctionTestCase(func)
         case(res)
         assert a[0] == 1
 
@@ -28,7 +28,7 @@ class TestNoseCases(unittest.TestCase):
             def test_func(self, a=a):
                 a.append(1)
 
-        case = nose.case.MethodTestCase(unbound_method(TestClass,
+        case = xnose.case.MethodTestCase(unbound_method(TestClass,
                                                        TestClass.test_func))
         case(res)
         assert a[0] == 1
@@ -45,7 +45,7 @@ class TestNoseCases(unittest.TestCase):
             def test_func(self, a=a):
                 a.append(1)
 
-        case = nose.case.MethodTestCase(unbound_method(TestClass,
+        case = xnose.case.MethodTestCase(unbound_method(TestClass,
                                                        TestClass.test_func))
         case(res)
         assert a[0] == 1
@@ -61,7 +61,7 @@ class TestNoseCases(unittest.TestCase):
             def test_func(self):
                 called.append('test')
 
-        case = nose.case.MethodTestCase(unbound_method(TestClass,
+        case = xnose.case.MethodTestCase(unbound_method(TestClass,
                                                        TestClass.test_func))
         case(res)
         self.assertEqual(called, ['setup', 'test', 'teardown'])
@@ -71,7 +71,7 @@ class TestNoseCases(unittest.TestCase):
                 called.append('setup')
                 raise Exception("failed")
         called[:] = []
-        case = nose.case.MethodTestCase(unbound_method(TestClassFailingSetup,
+        case = xnose.case.MethodTestCase(unbound_method(TestClassFailingSetup,
                                             TestClassFailingSetup.test_func))
         case(res)
         self.assertEqual(called, ['setup'])        
@@ -82,13 +82,13 @@ class TestNoseCases(unittest.TestCase):
                 raise Exception("failed")
             
         called[:] = []
-        case = nose.case.MethodTestCase(unbound_method(TestClassFailingTest,
+        case = xnose.case.MethodTestCase(unbound_method(TestClassFailingTest,
                                             TestClassFailingTest.test_func))
         case(res)
         self.assertEqual(called, ['setup', 'test', 'teardown'])     
         
     def test_function_test_case_fixtures(self):
-        from nose.tools import with_setup
+        from xnose.tools import with_setup
         res = unittest.TestResult()
 
         called = {}
@@ -103,7 +103,7 @@ class TestNoseCases(unittest.TestCase):
             raise TypeError("An exception")
 
         func_exc = with_setup(st, td)(func_exc)
-        case = nose.case.FunctionTestCase(func_exc)
+        case = xnose.case.FunctionTestCase(func_exc)
         case(res)
         assert 'st' in called
         assert 'func' in called
@@ -111,7 +111,7 @@ class TestNoseCases(unittest.TestCase):
 
     def test_failure_case(self):
         res = unittest.TestResult()
-        f = nose.failure.Failure(ValueError, "No such test spam")
+        f = xnose.failure.Failure(ValueError, "No such test spam")
         f(res)
         assert res.errors
 
@@ -126,7 +126,7 @@ class TestNoseCases(unittest.TestCase):
             pass
 
         foo = Foo()
-        case = nose.case.FunctionTestCase(test_foo, arg=(foo,))
+        case = xnose.case.FunctionTestCase(test_foo, arg=(foo,))
         case_repr_before = case.__repr__()
         foo.bar = "snafu'd!"
         case_repr_after = case.__repr__()
@@ -146,7 +146,7 @@ class TestNoseCases(unittest.TestCase):
                 pass
 
         foo = Foo()
-        case = nose.case.FunctionTestCase(
+        case = xnose.case.FunctionTestCase(
             unbound_method(FooTester, FooTester.test_foo), arg=(foo,))
         case_repr_before = case.__repr__()
         foo.bar = "snafu'd!"
@@ -164,16 +164,16 @@ class TestNoseTestWrapper(unittest.TestCase):
                         
         class TC(unittest.TestCase):
             def setUp(self):
-                print "TC setUp %s" % self
+                print("TC setUp %s" % self)
                 called.append('setUp')
             def runTest(self):
-                print "TC runTest %s" % self
+                print("TC runTest %s" % self)
                 called.append('runTest')
             def tearDown(self):
-                print "TC tearDown %s" % self
+                print("TC tearDown %s" % self)
                 called.append('tearDown')
 
-        case = nose.case.Test(TC())
+        case = xnose.case.Test(TC())
         case(res)
         assert not res.errors, res.errors
         assert not res.failures, res.failures
@@ -188,7 +188,7 @@ class TestNoseTestWrapper(unittest.TestCase):
         ResultProxy.called[:] = []
         res = unittest.TestResult()
         config = Config()
-        case = nose.case.Test(TC(), config=config,
+        case = xnose.case.Test(TC(), config=config,
                               resultProxy=ResultProxyFactory())
 
         case(res)
@@ -200,7 +200,7 @@ class TestNoseTestWrapper(unittest.TestCase):
                                  'stopTest', 'afterTest'])
 
     def test_address(self):
-        from nose.util import absfile, src
+        from xnose.util import absfile, src
         class TC(unittest.TestCase):
             def runTest(self):
                 raise Exception("error")
@@ -225,30 +225,30 @@ class TestNoseTestWrapper(unittest.TestCase):
                 pass
 
         fl = src(absfile(__file__))
-        case = nose.case.Test(TC())
+        case = xnose.case.Test(TC())
         self.assertEqual(case.address(), (fl, __name__, 'TC.runTest'))
 
-        case = nose.case.Test(nose.case.FunctionTestCase(test))
+        case = xnose.case.Test(xnose.case.FunctionTestCase(test))
         self.assertEqual(case.address(), (fl, __name__, 'test'))
 
-        case = nose.case.Test(nose.case.FunctionTestCase(
+        case = xnose.case.Test(xnose.case.FunctionTestCase(
             dummy, arg=(1,), descriptor=test))
         self.assertEqual(case.address(), (fl, __name__, 'test'))
 
-        case = nose.case.Test(nose.case.MethodTestCase(
+        case = xnose.case.Test(xnose.case.MethodTestCase(
                                   unbound_method(Test, Test.test)))
         self.assertEqual(case.address(), (fl, __name__, 'Test.test'))
 
-        case = nose.case.Test(
-            nose.case.MethodTestCase(unbound_method(Test, Test.try_something),
+        case = xnose.case.Test(
+            xnose.case.MethodTestCase(unbound_method(Test, Test.try_something),
                                      arg=(1,2,),
                                      descriptor=unbound_method(Test,
                                                                Test.test_gen)))
         self.assertEqual(case.address(),
                          (fl, __name__, 'Test.test_gen'))
 
-        case = nose.case.Test(
-            nose.case.MethodTestCase(unbound_method(Test, Test.test_gen),
+        case = xnose.case.Test(
+            xnose.case.MethodTestCase(unbound_method(Test, Test.test_gen),
                                      test=dummy, arg=(1,)))
         self.assertEqual(case.address(),
                          (fl, __name__, 'Test.test_gen'))
@@ -264,13 +264,13 @@ class TestNoseTestWrapper(unittest.TestCase):
             def test(self):
                 pass
 
-        case = nose.case.Test(TC())
+        case = xnose.case.Test(TC())
         self.assertEqual(case.context, TC)
 
-        case = nose.case.Test(nose.case.FunctionTestCase(test))
+        case = xnose.case.Test(xnose.case.FunctionTestCase(test))
         self.assertEqual(case.context, sys.modules[__name__])
 
-        case = nose.case.Test(nose.case.MethodTestCase(unbound_method(Test,
+        case = xnose.case.Test(xnose.case.MethodTestCase(unbound_method(Test,
                                                            Test.test)))
         self.assertEqual(case.context, Test)
 
@@ -290,9 +290,9 @@ class TestNoseTestWrapper(unittest.TestCase):
             def test_c(self):
                 pass
 
-        case_a = nose.case.Test(TC('test_a'))
-        case_b = nose.case.Test(TC('test_b'))
-        case_c = nose.case.Test(TC('test_c'))
+        case_a = xnose.case.Test(TC('test_a'))
+        case_b = xnose.case.Test(TC('test_b'))
+        case_c = xnose.case.Test(TC('test_c'))
 
         assert case_a.shortDescription().endswith("This is the description")
         assert case_b.shortDescription().endswith("This is the description")
@@ -307,7 +307,7 @@ class TestNoseTestWrapper(unittest.TestCase):
             def runTest(self):
                 pass
 
-        case = nose.case.Test(TC())
+        case = xnose.case.Test(TC())
         self.assertEqual(case.shortDescription(), None)
 
 if __name__ == '__main__':

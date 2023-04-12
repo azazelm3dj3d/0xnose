@@ -3,9 +3,9 @@ import sys
 import unittest
 from cStringIO import StringIO
 from optparse import OptionParser
-import nose.core
-from nose.config import Config, all_config_files
-from nose.tools import set_trace
+import xnose.core
+from xnose.config import Config, all_config_files
+from xnose.tools import set_trace
 from mock import Bucket, MockOptParser
 
 
@@ -16,16 +16,16 @@ class NullLoader:
 class TestAPI_run(unittest.TestCase):
 
     def test_restore_stdout(self):
-        print "AHOY"
+        print("AHOY")
         s = StringIO()
-        print s
+        print(s)
         stdout = sys.stdout
         conf = Config(stream=s)
         # set_trace()
-        print "About to run"
-        res = nose.core.run(
+        print("About to run")
+        res = xnose.core.run(
             testLoader=NullLoader(), argv=['test_run'], env={}, config=conf)
-        print "Done running"
+        print("Done running")
         stdout_after = sys.stdout
         self.assertEqual(stdout, stdout_after)
 
@@ -35,14 +35,14 @@ class Undefined(object):
 class TestUsage(unittest.TestCase):
 
     def test_from_directory(self):
-        usage_txt = nose.core.TestProgram.usage()
-        assert usage_txt.startswith('nose collects tests automatically'), (
+        usage_txt = xnose.core.TestProgram.usage()
+        assert usage_txt.startswith('xnose collects tests automatically'), (
                 "Unexpected usage: '%s...'" % usage_txt[0:50].replace("\n", '\n'))
 
     def test_from_zip(self):
         requested_data = []
 
-        # simulates importing nose from a zip archive
+        # simulates importing xnose from a zip archive
         # with a zipimport.zipimporter instance
         class fake_zipimporter(object):
 
@@ -51,21 +51,21 @@ class TestUsage(unittest.TestCase):
                 # Return as str in Python 2, bytes in Python 3.
                 return '<usage>'.encode('utf-8')
 
-        existing_loader = getattr(nose, '__loader__', Undefined)
+        existing_loader = getattr(xnose, '__loader__', Undefined)
         try:
-            nose.__loader__ = fake_zipimporter()
-            usage_txt = nose.core.TestProgram.usage()
+            xnose.__loader__ = fake_zipimporter()
+            usage_txt = xnose.core.TestProgram.usage()
             self.assertEqual(usage_txt, '<usage>')
             self.assertEqual(requested_data, [os.path.join(
-                os.path.dirname(nose.__file__), 'usage.txt')])
+                os.path.dirname(xnose.__file__), 'usage.txt')])
         finally:
             if existing_loader is not Undefined:
-                nose.__loader__ = existing_loader
+                xnose.__loader__ = existing_loader
             else:
-                del nose.__loader__
+                del xnose.__loader__
 
 
-class DummyTestProgram(nose.core.TestProgram):
+class DummyTestProgram(xnose.core.TestProgram):
     def __init__(self, *args, **kwargs):
         pass
 

@@ -1,8 +1,8 @@
 import os
 from optparse import OptionParser
-from nose.config import Config
-from nose.plugins.cover import Coverage
-from nose.tools import eq_
+from xnose.config import Config
+from xnose.plugins.cover import Coverage
+from xnose.tools import eq_
 
 
 class TestCoveragePlugin(object):

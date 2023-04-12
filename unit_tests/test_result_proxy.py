@@ -1,8 +1,8 @@
 import sys
 import unittest
 from inspect import ismethod
-from nose.config import Config
-from nose.proxy import ResultProxyFactory, ResultProxy
+from xnose.config import Config
+from xnose.proxy import ResultProxyFactory, ResultProxy
 from mock import RecordingPluginManager
 
 class TestResultProxy(unittest.TestCase):
@@ -27,7 +27,7 @@ class TestResultProxy(unittest.TestCase):
             assert ismethod(m), "%s is not a method" % method
 
     def test_proxy_proxies(self):
-        from nose.case import Test
+        from xnose.case import Test
         class Dummy:
             def __init__(self):
                 self.__dict__['called'] = []
@@ -72,12 +72,12 @@ class TestResultProxy(unittest.TestCase):
         proxy.testsRun
 
     def test_test_cases_can_access_result_attributes(self):
-        from nose.case import Test
+        from xnose.case import Test
         class TC(unittest.TestCase):
             def run(self, result):
                 unittest.TestCase.run(self, result)
-                print "errors", result.errors
-                print "failures", result.failures
+                print("errors", result.errors)
+                print("failures", result.failures)
             def runTest(self):
                 pass
         test = TC()
@@ -87,7 +87,7 @@ class TestResultProxy(unittest.TestCase):
         case(proxy)
 
     def test_proxy_handles_missing_methods(self):
-        from nose.case import Test
+        from xnose.case import Test
         class TC(unittest.TestCase):
             def runTest(self):
                 pass
@@ -99,14 +99,14 @@ class TestResultProxy(unittest.TestCase):
         proxy.afterTest(test)
         
     def test_proxy_calls_plugins(self):
-        from nose.case import Test
+        from xnose.case import Test
         res = unittest.TestResult()
         class TC(unittest.TestCase):
             def test_error(self):
-                print "So long"
+                print("So long")
                 raise TypeError("oops")
             def test_fail(self):
-                print "Hello"
+                print("Hello")
                 self.fail()
             def test(self):
                 pass
@@ -147,7 +147,7 @@ class TestResultProxy(unittest.TestCase):
         plugs.reset()
 
     def test_stop_on_error(self):
-        from nose.case import Test
+        from xnose.case import Test
         class TC(unittest.TestCase):
             def runTest(self):
                 raise Exception("Enough!")
@@ -161,7 +161,7 @@ class TestResultProxy(unittest.TestCase):
         assert res.shouldStop
 
     def test_coercion_of_custom_exception(self):
-        from nose.case import Test
+        from xnose.case import Test
 
         class CustomException(Exception):
             def __init__(self, message, two, three):

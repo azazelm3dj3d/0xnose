@@ -1,7 +1,7 @@
 import sys
 import time
 import unittest
-from nose.tools import *
+from xnose.tools import *
 
 compat_24 =  sys.version_info >= (2, 4)
 
@@ -11,7 +11,7 @@ class TestTools(unittest.TestCase):
         ok_(True)
         try:
             ok_(False, "message")
-        except AssertionError, e:
+        except AssertionError as e:
             assert str(e) == "message"
         else:
             self.fail("ok_(False) did not raise assertion error")
@@ -20,13 +20,13 @@ class TestTools(unittest.TestCase):
         eq_(1, 1)
         try:
             eq_(1, 0, "message")
-        except AssertionError, e:
+        except AssertionError as e:
             assert str(e) == "message"
         else:
             self.fail("eq_(1, 0) did not raise assertion error")
         try:
             eq_(1, 0)
-        except AssertionError, e:
+        except AssertionError as e:
             assert str(e) == "1 != 0"
         else:
             self.fail("eq_(1, 0) did not raise assertion error")
@@ -48,7 +48,7 @@ class TestTools(unittest.TestCase):
         assert '__unittest' not in istest.func_globals
 
     def test_raises(self):
-        from nose.case import FunctionTestCase
+        from xnose.case import FunctionTestCase
 
         def raise_typeerror():
             raise TypeError("foo")
@@ -66,14 +66,14 @@ class TestTools(unittest.TestCase):
         raise_good()
         try:
             raise_other()
-        except TypeError, e:
+        except TypeError as e:
             pass
         else:
             self.fail("raises did pass through unwanted exception")
 
         try:
             no_raise()
-        except AssertionError, e:
+        except AssertionError as e:
             pass
         else:
             self.fail("raises did not raise assertion error on no exception")
@@ -117,7 +117,7 @@ class TestTools(unittest.TestCase):
         assert f2.teardown == 'teardown'
 
     def test_nested_decorators(self):
-        from nose.tools import raises, timed, with_setup
+        from xnose.tools import raises, timed, with_setup
 
         def test():
             pass
@@ -132,8 +132,8 @@ class TestTools(unittest.TestCase):
         assert test.teardown == foo
 
     def test_decorator_func_sorting(self):
-        from nose.tools import raises, timed, with_setup
-        from nose.util import func_lineno
+        from xnose.tools import raises, timed, with_setup
+        from xnose.util import func_lineno
 
         def test1():
             pass
@@ -160,10 +160,9 @@ class TestTools(unittest.TestCase):
         self.assertEqual(func_lineno(test3), test3_pos)
 
     def test_testcase_funcs(self):
-        import nose.tools
-        tc_asserts = [ at for at in dir(nose.tools)
-                       if at.startswith('assert_') ]
-        print tc_asserts
+        import xnose.tools
+        tc_asserts = [ at for at in dir(xnose.tools) if at.startswith('assert_') ]
+        print(tc_asserts)
 
         # FIXME: not sure which of these are in all supported
         # versions of python
@@ -172,8 +171,8 @@ class TestTools(unittest.TestCase):
             assert 'assert_true' in tc_asserts
 
     def test_multiple_with_setup(self):
-        from nose.tools import with_setup
-        from nose.case import FunctionTestCase
+        from xnose.tools import with_setup
+        from xnose.case import FunctionTestCase
         from unittest import TestResult
 
         called = []

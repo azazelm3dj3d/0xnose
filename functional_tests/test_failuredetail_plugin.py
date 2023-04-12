@@ -1,9 +1,9 @@
 import os
 import sys
 import unittest
-from nose.plugins.failuredetail import FailureDetail
-from nose.plugins.capture import Capture
-from nose.plugins import PluginTester
+from xnose.plugins.failuredetail import FailureDetail
+from xnose.plugins.capture import Capture
+from xnose.plugins import PluginTester
 
 support = os.path.join(os.path.dirname(__file__), 'support')
 
@@ -14,13 +14,13 @@ class TestFailureDetail(PluginTester, unittest.TestCase):
     suitepath = os.path.join(support, 'fdp')
 
     def runTest(self):
-        print '*' * 70
-        print str(self.output)
-        print '*' * 70
+        print('*' * 70)
+        print(str(self.output))
+        print('*' * 70)
 
         expect = \
         'AssertionError: a is not 4\n'
-        '    print "Hello"\n'
+        '    print("Hello")\n'
         '    2 = 2\n'
         '>>  assert 2 == 4, "a is not 4"'
 
@@ -34,13 +34,13 @@ class TestFailureDetailWithCapture(PluginTester, unittest.TestCase):
     suitepath = os.path.join(support, 'fdp/test_fdp_no_capt.py')
 
     def runTest(self):
-        print '*' * 70
-        print str(self.output)
-        print '*' * 70
+        print('*' * 70)
+        print(str(self.output))
+        print('*' * 70)
 
         expect = \
         'AssertionError: a is not 4\n'
-        '    print "Hello"\n'
+        '    print("Hello")\n'
         '    2 = 2\n'
         '>>  assert 2 == 4, "a is not 4"'
 
@@ -53,9 +53,9 @@ class TestFailureDetailWithUnicodeAndCapture(PluginTester, unittest.TestCase):
     suitepath = os.path.join(support, 'issue720')
 
     def runTest(self):
-        print '*' * 70
-        print str(self.output)
-        print '*' * 70
+        print('*' * 70)
+        print(str(self.output))
+        print('*' * 70)
 
         assert 'UnicodeDecodeError' not in self.output
         assert 'UnicodeEncodeError' not in self.output

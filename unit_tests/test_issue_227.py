@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-from nose.plugins.skip import SkipTest
+from xnose.plugins.skip import SkipTest
 import sys
 
 
@@ -9,4 +9,4 @@ def setup():
 
 
 def test_unicode():
-    print u'b\u00f6y'
+    print(u'b\u00f6y')

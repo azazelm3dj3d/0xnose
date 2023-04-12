@@ -1,6 +1,6 @@
 import unittest
-from nose.config import Config
-from nose.plugins.builtin import TestId
+from xnose.config import Config
+from xnose.plugins.builtin import TestId
 import mock
 
 class TestTestIdPlugin(unittest.TestCase):
@@ -11,7 +11,7 @@ class TestTestIdPlugin(unittest.TestCase):
         opt = mock.Bucket()
         opt.testIdFile = '.noseids'
         tid.configure(opt, c)
-        print tid.idfile
+        print(tid.idfile)
         assert tid.idfile.startswith(c.workingDir), \
                "%s is not under %s" % (tid.idfile, c.workingDir)
 

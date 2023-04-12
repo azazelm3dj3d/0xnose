@@ -5,11 +5,11 @@ from docutils.core import publish_string, publish_parts
 from docutils.nodes import SparseNodeVisitor
 from docutils.readers.standalone import Reader
 from docutils.writers import Writer
-from nose.config import Config
-import nose.plugins
-from nose.plugins.manager import BuiltinPluginManager
-from nose.plugins import errorclass
-import nose
+from xnose.config import Config
+import xnose.plugins
+from xnose.plugins.manager import BuiltinPluginManager
+from xnose.plugins import errorclass
+import xnose
 import os
 import pudge.browser
 import re
@@ -50,7 +50,7 @@ def wiki_word(node):
     else:
         if '.' in text:
             parts = text.split('.')
-            link = 'http://python-nose.googlecode.com/svn/trunk'
+            link = 'http://python-xnose.googlecode.com/svn/trunk'
             for p in parts:
                 # stop at class names
                 if p[0].upper() == p[0]:
@@ -59,7 +59,7 @@ def wiki_word(node):
             node['refuri'] = link
             return True
         node['refuri'] = ''.join(map(ucfirst, words(text)))
-    print "Unknown ref %s -> %s" % (orig, node['refuri'])
+    print("Unknown ref %s -> %s" % (orig, node['refuri']))
     del node['refname']
     node.resolved = True
     return True
@@ -189,7 +189,7 @@ class WikiVisitor(SparseNodeVisitor):
 
 
 def runcmd(cmd):
-    print cmd
+    print(cmd)
     (status,output) = getstatusoutput(cmd)
     if status != success:
         raise Exception(output)
@@ -209,9 +209,9 @@ def wikirst(doc):
 
 def plugin_interface():
     """use pudge browser to generate interface docs
-    from nose.plugins.base.PluginInterface
+    from xnose.plugins.base.PluginInterface
     """
-    b = pudge.browser.Browser(['nose.plugins.base'], None)
+    b = pudge.browser.Browser(['xnose.plugins.base'], None)
     m = b.modules()[0]
     intf = list([ c for c in m.classes() if c.name ==
                   'IPluginInterface'])[0]
@@ -243,8 +243,8 @@ def example_plugin():
 
 
 def tools():
-    top = wikirst(nose.tools.__doc__)
-    b = pudge.browser.Browser(['nose.tools'], None)
+    top = wikirst(xnose.tools.__doc__)
+    b = pudge.browser.Browser(['xnose.tools'], None)
     m = b.modules()[0]
     funcs = [ (f.name, f.formatargs().replace('(self, ', '('), f.doc())
               for f in m.routines() ]
@@ -259,7 +259,7 @@ def tools():
 
 def usage():
     conf = Config(plugins=BuiltinPluginManager())
-    usage_text = conf.help(nose.main.__doc__).replace('mkwiki.py', 'nosetests')
+    usage_text = conf.help(xnose.main.__doc__).replace('mkwiki.py', 'xnosetests')
     out = '{{{\n%s\n}}}\n' % usage_text
     return out
 
@@ -269,27 +269,27 @@ def mkwiki(path):
     # Pages to publish and the docstring(s) to load for that page
     #
 
-    pages = {  #'SandBox': wikirst(section(nose.__doc__, 'Writing tests'))
-        'WritingTests': wikirst(section(nose.__doc__, 'Writing tests')),
-        'NoseFeatures': wikirst(section(nose.__doc__, 'Features')),
-        'WritingPlugins': wikirst(nose.plugins.__doc__),
+    pages = {  #'SandBox': wikirst(section(xnose.__doc__, 'Writing tests'))
+        'WritingTests': wikirst(section(xnose.__doc__, 'Writing tests')),
+        'NoseFeatures': wikirst(section(xnose.__doc__, 'Features')),
+        'WritingPlugins': wikirst(xnose.plugins.__doc__),
         'PluginInterface': plugin_interface(),
         'ErrorClassPlugin': wikirst(errorclass.__doc__),
         'TestingTools': tools(),
         'FindingAndRunningTests': wikirst(
-            section(nose.__doc__, 'Finding and running tests')),
+            section(xnose.__doc__, 'Finding and running tests')),
         # FIXME finish example plugin doc... add some explanation
         'ExamplePlugin': example_plugin(),
         
-        'NosetestsUsage': usage(),
+        'xnosetestsUsage': usage(),
         }
 
     current = os.getcwd()
     w = Wiki(path)
     for page, doc in pages.items():
-        print "====== %s ======" % page
+        print("====== %s ======" % page)
         w.update_docs(page, doc)
-        print "====== %s ======" % page
+        print("====== %s ======" % page)
     os.chdir(current)
 
 
@@ -333,17 +333,17 @@ class Wiki(object):
         wikified = docs + div
         if not page_src:
             new_src = wikified + warning
-            print "! Adding new page"
+            print("! Adding new page")
         else:
             m = self.doc_re.search(page_src)
             if m:
-                print "! Updating doc section"
+                print("! Updating doc section")
                 new_src = self.doc_re.sub(wikified, page_src, 1)
             else:
-                print "! Adding new doc section"
+                print("! Adding new doc section")
                 new_src = wikified + page_src
         if new_src == page_src:
-            print "! No changes"
+            print("! No changes")
             return        
         # Restore any headers (lines marked by # at start of file)
         if headers:

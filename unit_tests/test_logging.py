@@ -1,7 +1,7 @@
 import logging
 import unittest
-from nose.config import Config
-#from nose.core import configure_logging
+from xnose.config import Config
+#from xnose.core import configure_logging
 from mock import *
 
 
@@ -28,13 +28,13 @@ class TestLoggingConfig(unittest.TestCase):
         """root logger settings ignored"""
 
         root = logging.getLogger('')
-        nose = logging.getLogger('nose')
+        xnose = logging.getLogger('xnose')
 
         config = Config()
         config.configureLogging()
         
         root.setLevel(logging.DEBUG)
-        self.assertEqual(nose.level, logging.WARN)
+        self.assertEqual(xnose.level, logging.WARN)
     
 if __name__ == '__main__':
     unittest.main()

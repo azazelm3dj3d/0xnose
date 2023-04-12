@@ -4,9 +4,9 @@ import sys
 import tempfile
 import unittest
 
-from nose.plugins import PluginTester
-from nose.plugins.builtin import Doctest
-from nose.plugins.builtin import TestId
+from xnose.plugins import PluginTester
+from xnose.plugins.builtin import Doctest
+from xnose.plugins.builtin import TestId
 from cPickle import dump, load
 
 support = os.path.join(os.path.dirname(__file__), 'support')
@@ -166,9 +166,9 @@ class TestWithDoctest_2(PluginTester, unittest.TestCase):
         return None
 
     def test_load_ids_doctest(self):
-        print '*' * 70
-        print str(self.output)
-        print '*' * 70
+        print('*' * 70)
+        print(str(self.output))
+        print('*' * 70)
 
         assert 'Doctest: exm.add_one ... FAIL' in self.output
         
@@ -188,9 +188,9 @@ class TestWithDoctestFileTests_1(PluginTester, unittest.TestCase):
     suitepath = os.path.join(support, 'dtt', 'docs')
 
     def test_docfile_tests_get_ids(self):
-        print '>' * 70
-        print str(self.output)
-        print '>' * 70
+        print('>' * 70)
+        print(str(self.output))
+        print('>' * 70)
 
         last = None
         for line in self.output:
@@ -234,9 +234,9 @@ class TestWithDoctestFileTests_2(PluginTester, unittest.TestCase):
         return None
 
     def test_load_from_name_id_docfile_test(self):
-        print '*' * 70
-        print str(self.output)
-        print '*' * 70
+        print('*' * 70)
+        print(str(self.output))
+        print('*' * 70)
 
         assert 'Doctest: errdoc.txt ... FAIL' in self.output
         
@@ -251,7 +251,7 @@ class TestWithDoctestFileTests_2(PluginTester, unittest.TestCase):
 if __name__ == '__main__':
     import logging
     logging.basicConfig()
-    l = logging.getLogger('nose.plugins.testid')
+    l = logging.getLogger('xnose.plugins.testid')
     l.setLevel(logging.DEBUG)
     
     try:

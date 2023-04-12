@@ -2,10 +2,10 @@ import imp
 import os
 import sys
 import unittest
-from nose.loader import TestLoader as Loader
+from xnose.loader import TestLoader as Loader
 
-from nose import util, loader, selector # so we can set mocks
-import nose.case
+from xnose import util, loader, selector # so we can set mocks
+import xnose.case
 
 
 def safepath(p):
@@ -122,7 +122,7 @@ def mods():
         for i in range(0, 4):
             yield test_odd, i
 
-    M['nose'] = nose
+    M['xnose'] = xnose
     M['__main__'] = sys.modules['__main__']
     M['test_module'].TC = TC
     TC.__module__ = 'test_module'
@@ -182,7 +182,7 @@ def mock_listdir(path):
 
 
 def mock_isdir(path):
-    print "is dir '%s'?" % path
+    print("is dir '%s'?" % path)
     paths = map(safepath, [
         '/a/dir/path', '/package',
         '/package/subpackage', '/sort/lib',
@@ -201,7 +201,7 @@ def mock_isfile(path):
 
 
 def mock_exists(path):
-    print "exists '%s'?" % path
+    print("exists '%s'?" % path)
     paths = map(safepath, [
         '/package', '/package/__init__.py', '/package/subpackage',
         '/package/subpackage/__init__.py'
@@ -270,35 +270,35 @@ class TestTestLoader(unittest.TestCase):
         l.loadTestsFromNames
 
     def test_load_from_name_dir_abs(self):
-        print "load from name dir"
+        print("load from name dir")
         l = self.l
         suite = l.loadTestsFromName(safepath('/a/dir/path'))
         tests = [t for t in suite]
         self.assertEqual(len(tests), 1)
 
     def test_load_from_name_module_filename(self):
-        print "load from name module filename"
+        print("load from name module filename")
         l = self.l
         suite = l.loadTestsFromName('test_module.py')
         tests = [t for t in suite]
         assert tests
 
     def test_load_from_name_module(self):
-        print "load from name module"
+        print("load from name module")
         l = self.l
         suite = l.loadTestsFromName('test_module')
         tests = [t for t in suite]
         assert tests            
 
     def test_load_from_name_nontest_module(self):
-        print "load from name nontest module"
+        print("load from name nontest module")
         l = self.l
         suite = l.loadTestsFromName('module')
         tests = [t for t in suite]
         assert tests
 
     def test_load_from_name_method(self):
-        print "load from name method"
+        print("load from name method")
         res = unittest.TestResult()
         l = self.l
         suite = l.loadTestsFromName(':TC.runTest')
@@ -310,11 +310,11 @@ class TestTestLoader(unittest.TestCase):
                "Expected a ValueError for unresolvable test name, got none"
 
     def test_load_from_name_module_class(self):
-        print "load from name module class"
+        print("load from name module class")
         l = self.l
         suite = l.loadTestsFromName('test_module:TC')
         tests = [t for t in suite]
-        print tests
+        print(tests)
         assert tests
         assert len(tests) == 1, \
                "Should have loaded 1 test, but got %s" % tests
@@ -322,21 +322,21 @@ class TestTestLoader(unittest.TestCase):
         # the item in tests is a suite, we want to check that all of
         # the members of the suite are wrapped -- though this is really
         # a suite test and doesn't belong here..
-        assert filter(lambda t: isinstance(t, nose.case.Test), tests[0])
+        assert filter(lambda t: isinstance(t, xnose.case.Test), tests[0])
 
     def test_load_from_name_module_func(self):
-        print "load from name module func"
+        print("load from name module func")
         l = self.l
         suite = l.loadTestsFromName('test_module:test_func')
         tests = [t for t in suite]
         assert tests
         assert len(tests) == 1, \
                "Should have loaded 1 test, but got %s" % tests
-        assert isinstance(tests[0].test, nose.case.FunctionTestCase), \
+        assert isinstance(tests[0].test, xnose.case.FunctionTestCase), \
                "Expected FunctionTestCase not %s" % tests[0].test
 
     def test_load_from_name_module_method(self):
-        print "load from name module method"
+        print("load from name module method")
         l = self.l
         suite = l.loadTestsFromName('test_module:TC.runTest')
         tests = [t for t in suite]
@@ -345,7 +345,7 @@ class TestTestLoader(unittest.TestCase):
                "Should have loaded 1 test, but got %s" % tests
 
     def test_load_from_name_module_missing_class(self):
-        print "load from name module missing class"
+        print("load from name module missing class")
         res = unittest.TestResult()
         l = self.l
         suite = l.loadTestsFromName('test_module:TC2')
@@ -356,7 +356,7 @@ class TestTestLoader(unittest.TestCase):
         assert res.errors, "Expected missing class test to raise exception"
 
     def test_load_from_name_module_missing_func(self):
-        print "load from name module missing func"
+        print("load from name module missing func")
         res = unittest.TestResult()
         l = self.l
         suite = l.loadTestsFromName('test_module:test_func2')
@@ -367,7 +367,7 @@ class TestTestLoader(unittest.TestCase):
         assert res.errors, "Expected missing func test to raise exception"
 
     def test_load_from_name_module_missing_method(self):
-        print "load from name module missing method"
+        print("load from name module missing method")
         res = unittest.TestResult()
         l = self.l
         suite = l.loadTestsFromName('test_module:TC.testThat')
@@ -378,7 +378,7 @@ class TestTestLoader(unittest.TestCase):
         assert res.errors, "Expected missing method test to raise exception"
 
     def test_load_from_name_module_transplanted_class_missing_method(self):
-        print "load from name module transplanted class missing method"
+        print("load from name module transplanted class missing method")
         res = unittest.TestResult()
         l = self.l
         suite = l.loadTestsFromName('test_transplant:Transplant.testThat')
@@ -389,7 +389,7 @@ class TestTestLoader(unittest.TestCase):
         assert res.errors, "Expected missing method test to raise exception"
 
     def test_load_from_name_missing_module(self):
-        print "load from name missing module"
+        print("load from name missing module")
         res = unittest.TestResult()
         l = self.l
         suite = l.loadTestsFromName('other_test_module')
@@ -400,27 +400,27 @@ class TestTestLoader(unittest.TestCase):
         assert res.errors, "Expected missing module test to raise exception"
 
     def test_cases_from_testcase_are_wrapped(self):
-        print "cases from testcase are wrapped"
+        print("cases from testcase are wrapped")
         test_module = M['test_module']
         l = self.l
         suite = l.loadTestsFromTestCase(test_module.TC)
-        print suite
+        print(suite)
         tests = [t for t in suite]
         for test in tests:
-            assert isinstance(test, nose.case.Test), \
+            assert isinstance(test, xnose.case.Test), \
                    "Test %r is not a test wrapper" % test
 
     def test_load_test_func(self):
-        print "load test func"
+        print("load test func")
         l = self.l
         suite = l.loadTestsFromName('test_module')
         tests = [t for t in suite]
         self.assertEqual(len(tests), 2, "Wanted 2 tests, got %s" % tests)
-        assert filter(lambda t: isinstance(t, nose.case.Test), tests)
-        print tests
+        assert filter(lambda t: isinstance(t, xnose.case.Test), tests)
+        print(tests)
         class_tests = tests[0]
         for t in class_tests:
-            print "class test: ", t
+            print("class test: ", t)
         func_tests = tests[1:]
         assert class_tests, \
                "Expected class suite got %s" % class_tests
@@ -430,29 +430,29 @@ class TestTestLoader(unittest.TestCase):
             assert isinstance(test.test, unittest.TestCase), \
                    "Expected TestCase npt %s" % tests[0].test
         for test in func_tests:
-            assert isinstance(test.test, nose.case.FunctionTestCase), \
+            assert isinstance(test.test, xnose.case.FunctionTestCase), \
                    "Expected FunctionTestCase not %s" % tests[1].test
 
     def test_load_from_name_package_root_path(self):
-        print "load from name package root path"
+        print("load from name package root path")
         l = self.l
         suite = l.loadTestsFromName(safepath('/package'))
-        print suite
+        print(suite)
         tests = [t for t in suite]
         assert len(tests) == 1, "Expected one test, got %s" % tests
         tests = list(tests[0])
         assert not tests, "The full test list %s was not empty" % tests
 
     def test_load_from_name_subpackage_safepath(self):
-        print "load from name subpackage path"
+        print("load from name subpackage path")
         l = self.l
         suite = l.loadTestsFromName(safepath('/package/subpackage'))
-        print suite
+        print(suite)
         tests = [t for t in suite]
         assert len(tests) == 0, "Expected no tests, got %s" % tests
     
     def test_load_metaclass_customized_classes(self):
-        print "load metaclass-customized classes"
+        print("load metaclass-customized classes")
         test_module_with_generators = M['test_module_with_metaclass_tests']
         l = self.l
         suite = l.loadTestsFromModule(test_module_with_generators)
@@ -461,32 +461,32 @@ class TestTestLoader(unittest.TestCase):
         self.assertEqual(len(tc_methods), 2)
 
     def test_load_generators(self):
-        print "load generators"
+        print("load generators")
         test_module_with_generators = M['test_module_with_generators']
         l = self.l
         suite = l.loadTestsFromModule(test_module_with_generators)
         tests = [t for t in suite]
 
         for t in tests:
-            print "test", t
+            print("test", t)
             assert isinstance(t, unittest.TestSuite), \
                    "Test %s is not a suite" % t
 
         # the first item is a class, with both normal and generator methods
         count = 0
         cl_tests = [t for t in tests[0]]
-        print "class tests", cl_tests
+        print("class tests", cl_tests)
         normal, gens = cl_tests[0], cl_tests[1:]
-        assert isinstance(normal, nose.case.Test), \
+        assert isinstance(normal, xnose.case.Test), \
                "Expected a test case but got %s" % normal
         for gen in gens:
             assert isinstance(gen, unittest.TestSuite), \
                    "Expected a generator test suite, but got %s" % gen
             count = 0
             for t in gen:
-                print "generated test %s" % t
-                print t.shortDescription()
-                assert isinstance(t, nose.case.Test), \
+                print("generated test %s" % t)
+                print(t.shortDescription())
+                assert isinstance(t, xnose.case.Test), \
                        "Test %s is not a test?" % t
                 count += 1
             self.assertEqual(count, 4, "Expected to generate 4 tests, but "
@@ -495,11 +495,11 @@ class TestTestLoader(unittest.TestCase):
         # 2nd item is generated from test_func_generator
         count = 0
         for t in tests[1]:
-            print "generated test %s" % t
-            print t.shortDescription()
-            assert isinstance(t, nose.case.Test), \
+            print("generated test %s" % t)
+            print(t.shortDescription())
+            assert isinstance(t, xnose.case.Test), \
                    "Test %s is not a Test?" % t
-            assert isinstance(t.test, nose.case.FunctionTestCase), \
+            assert isinstance(t.test, xnose.case.FunctionTestCase), \
                    "Test %s is not a FunctionTestCase" % t.test
             assert 'test_func_generator' in str(t), \
                    "Bad str val '%s' for test" % str(t)
@@ -513,11 +513,11 @@ class TestTestLoader(unittest.TestCase):
 
         count = 0
         for t in tests[2]:
-            print "generated test %s" % t
-            print t.shortDescription()
-            assert isinstance(t, nose.case.Test), \
+            print("generated test %s" % t)
+            print(t.shortDescription())
+            assert isinstance(t, xnose.case.Test), \
                    "Test %s is not a Test?" % t
-            assert isinstance(t.test, nose.case.FunctionTestCase), \
+            assert isinstance(t.test, xnose.case.FunctionTestCase), \
                    "Test %s is not a FunctionTestCase" % t.test
             assert 'test_func_generator_name' in str(t), \
                    "Bad str val '%s' for test" % str(t)
@@ -530,24 +530,24 @@ class TestTestLoader(unittest.TestCase):
                "Expected to generate 4 tests, but got %s" % count
 
     def test_load_transplanted_generator(self):
-        print "load transplanted generator (issue 501)"
+        print("load transplanted generator (issue 501)")
         test_module_transplant_generator = M['test_module_transplant_generator']
         l = self.l
         suite = l.loadTestsFromModule(test_module_transplant_generator)
         tests = [t for t in suite]
 
         assert len(tests) == 1
-        print "test", tests[0]
+        print("test", tests[0])
         assert isinstance(tests[0], unittest.TestSuite), \
             "Test is not a suite - probably did not look like a generator"
 
         count = 0
         for t in tests[0]:
-            print "generated test %s" % t
-            print t.shortDescription()
-            assert isinstance(t, nose.case.Test), \
+            print("generated test %s" % t)
+            print(t.shortDescription())
+            assert isinstance(t, xnose.case.Test), \
                    "Test %s is not a Test?" % t
-            assert isinstance(t.test, nose.case.FunctionTestCase), \
+            assert isinstance(t.test, xnose.case.FunctionTestCase), \
                    "Test %s is not a FunctionTestCase" % t.test
             assert 'test_func_generator' in str(t), \
                    "Bad str val '%s' for test" % str(t)

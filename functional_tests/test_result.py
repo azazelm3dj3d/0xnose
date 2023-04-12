@@ -2,9 +2,9 @@ import os
 import sys
 import unittest
 from cStringIO import StringIO
-from nose.config import Config
-from nose.core import TestProgram
-from nose.plugins.manager import PluginManager
+from xnose.config import Config
+from xnose.core import TestProgram
+from xnose.plugins.manager import PluginManager
 
 
 support = os.path.join(os.path.dirname(__file__), 'support')
@@ -23,7 +23,7 @@ class TestResultSummary(unittest.TestCase):
         TestProgram(argv=['t', '--with-todo', pkpath],
                     config=config, exit=False)
         out = stream.getvalue()
-        print out
+        print(out)
         self.assert_('FAILED (TODO=1)' in out)
 
 

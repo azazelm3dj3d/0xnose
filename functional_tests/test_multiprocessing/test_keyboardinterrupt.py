@@ -1,18 +1,18 @@
-from nose.exc import SkipTest
+from xnose.exc import SkipTest
 from subprocess import Popen,PIPE
 import os
 import sys
 from time import sleep
 import signal
 
-import nose
+import xnose
 
 support = os.path.join(os.path.dirname(__file__), 'support')
 
 PYTHONPATH = os.environ['PYTHONPATH'] if 'PYTHONPATH' in os.environ else ''
 
 def setup():
-    nose_parent_dir = os.path.normpath(os.path.join(os.path.abspath(os.path.dirname(nose.__file__)),'..'))
+    nose_parent_dir = os.path.normpath(os.path.join(os.path.abspath(os.path.dirname(xnose.__file__)),'..'))
     paths = [nose_parent_dir]
     if PYTHONPATH:
         paths.append(PYTHONPATH)
@@ -66,11 +66,11 @@ def test_keyboardinterrupt():
     process, logfile, _ = keyboardinterrupt('keyboardinterrupt.py')
     stdout, stderr = [s.decode('utf-8') for s in process.communicate(None)]
     log = get_log_content(logfile)
-    print stderr
-    print '----'
-    print stdout
-    print '----'
-    print log
+    print(stderr)
+    print('----')
+    print(stdout)
+    print('----')
+    print(log)
     assert 'setup' in log
     assert 'test_timeout' in log
     assert 'test_timeout_finished' not in log
@@ -88,11 +88,11 @@ def test_keyboardinterrupt_twice():
     os.killpg(process.pid, signal.SIGINT)
     stdout, stderr = [s.decode('utf-8') for s in process.communicate(None)]
     log = get_log_content(logfile)
-    print stderr
-    print '----'
-    print stdout
-    print '----'
-    print log
+    print(stderr)
+    print('----')
+    print(stdout)
+    print('----')
+    print(log)
     assert 'setup' in log
     assert 'test_timeout' in log
     assert 'test_timeout_finished' not in log

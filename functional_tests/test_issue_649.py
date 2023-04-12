@@ -2,8 +2,8 @@
 import os
 import sys
 import unittest
-from nose.plugins.capture import Capture
-from nose.plugins import PluginTester
+from xnose.plugins.capture import Capture
+from xnose.plugins import PluginTester
 
 support = os.path.join(os.path.dirname(__file__), 'support')
 
@@ -14,5 +14,5 @@ class TestIssue649(PluginTester, unittest.TestCase):
     suitepath = os.path.join(support, 'issue649')
 
     def runTest(self):
-        print str(self.output)
+        print(str(self.output))
         assert 'UnicodeDecodeError' not in self.output

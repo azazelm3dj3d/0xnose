@@ -1,1 +1,1 @@
-test = 'the nose knows'
+test = 'the xnose knows'

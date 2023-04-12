@@ -1,6 +1,6 @@
 import unittest
-from nose.plugins import Plugin
-from nose.plugins.manager import DefaultPluginManager
+from xnose.plugins import Plugin
+from xnose.plugins.manager import DefaultPluginManager
 
 class OverridesSkip(Plugin):
     """Plugin to override the built-in Skip"""

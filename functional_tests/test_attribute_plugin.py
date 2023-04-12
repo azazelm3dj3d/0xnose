@@ -1,8 +1,8 @@
 import os
 import sys
 import unittest
-from nose.plugins.attrib import AttributeSelector
-from nose.plugins import PluginTester
+from xnose.plugins.attrib import AttributeSelector
+from xnose.plugins import PluginTester
 
 support = os.path.join(os.path.dirname(__file__), 'support')
 
@@ -17,9 +17,10 @@ class AttributePluginTester(PluginTester, unittest.TestCase):
     activate = '-v'
 
     def runTest(self):
-        print '*' * 70
-        print str(self.output)
-        print '*' * 70
+        print('*' * 70)
+        print(str(self.output))
+        print('*' * 70)
+
         self.verify()
 
     def verify(self):

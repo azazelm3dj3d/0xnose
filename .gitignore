@@ -2,7 +2,7 @@
 *.pyc
 *.pyo
 .DS_Store
-.nose
+.xnose
 *.egg-info
 *.bak
 *.rej
@@ -10,7 +10,7 @@
 *.orig
 example.cfg
 .coverage
-nosetests.xml
+xnosetests.xml
 xunit.xml
 _env
 doc/.build
@@ -20,3 +20,4 @@ build
 .tox
 .*.sw[nop]
 cover
+__pycache__/

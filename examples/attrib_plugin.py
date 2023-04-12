@@ -1,27 +1,27 @@
 """
-Examples of test function/method attribute usage with patched nose
+Examples of test function/method attribute usage with patched xnose
 
 Simple syntax (-a, --attr) examples:
-  * nosetests -a status=stable
+  * xnosetests -a status=stable
     => only test cases with attribute "status" having value "stable"
 
-  * nosetests -a priority=2,status=stable
+  * xnosetests -a priority=2,status=stable
     => both attributes must match
 
-  * nosetests -a tags=http
+  * xnosetests -a tags=http
     => attribute list "tags" must contain value "http" (see test_foobar()
        below for definition)
 
-  * nosetests -a slow
+  * xnosetests -a slow
     => attribute "slow" must be defined and its value cannot equal to False
        (False, [], "", etc...)
 
-  * nosetests -a !slow
+  * xnosetests -a !slow
     => attribute "slow" must NOT be defined or its value must be equal to False
 
 Eval expression syntax (-A, --eval-attr) examples:
-  * nosetests -A "not slow"
-  * nosetests -A "(priority > 5) and not slow"
+  * xnosetests -A "not slow"
+  * xnosetests -A "(priority > 5) and not slow"
   
 This example and the accompanied patch is in public domain, free for any use.
 
@@ -41,7 +41,7 @@ def attr(**kwargs):
 # test function with single attribute
 @attr(priority = 1)
 def test_dummy():
-    print "dummy"
+   print("dummy")
     
 # test function with multiple attributes
 @attr(status = "stable",              # simple string attribute
@@ -51,11 +51,12 @@ def test_dummy():
       tags = ["http", "pop", "imap"]) # will be run if any of the list items
                                       #   matches
 def test_foobar():
-    print "foobar"
+   print("foobar")
 
 # another way of adding attributes...
 def test_fluffy():
-    print "fluffy"
+   print("fluffy")
+
 test_fluffy.status = "unstable"
 test_fluffy.slow = True
 test_fluffy.priority = 2
@@ -64,19 +65,19 @@ test_fluffy.priority = 2
 class TestSomething:
     @attr(status = "stable", priority = 2)
     def test_xyz(self):
-        print "xyz"
+       print("xyz")
 
 # class methods "inherit" attributes from the class but can override them
 class TestOverride:
     value = "class"
-    # run all methods with "nosetests -a value"
+    # run all methods with "xnosetests -a value"
 
     @attr(value = "method")
     def test_override(self):
-        # run with "nosetests -a value=method"
-        print "override"
+      """run with "xnosetests -a value=method"""
+      print("override")
     
     def test_inherit(self):
-        # run with "nosetests -a value=class"
-        print "inherit"
-    
+      """run with "xnosetests -a value=class"""
+      print("inherit")
+  

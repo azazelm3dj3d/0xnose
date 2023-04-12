@@ -1,8 +1,8 @@
 import os
 import sys
 import unittest
-from nose.plugins.isolate import IsolationPlugin
-from nose.plugins import PluginTester
+from xnose.plugins.isolate import IsolationPlugin
+from xnose.plugins import PluginTester
 
 support = os.path.join(os.path.dirname(__file__), 'support')
 
@@ -13,7 +13,7 @@ class TestDiscovery(PluginTester, unittest.TestCase):
     suitepath = os.path.join(support, 'ipt')
     
     def runTest(self):
-        print str(self.output)
+        print(str(self.output))
 
         for line in self.output:
             if not line.strip():
@@ -43,7 +43,7 @@ class TestLoadFromNames(PluginTester, unittest.TestCase):
         return None
     
     def runTest(self):
-        print str(self.output)
+        print(str(self.output))
 
         for line in self.output:
             if not line.strip():

@@ -3,9 +3,9 @@ Tests that plugins can override loadTestsFromTestCase
 """
 import os
 import unittest
-from nose import loader
-from nose.plugins import PluginTester
-from nose.plugins.base import Plugin
+from xnose import loader
+from xnose.plugins import PluginTester
+from xnose.plugins.base import Plugin
 
 
 support = os.path.join(os.path.dirname(__file__), 'support')
@@ -15,22 +15,22 @@ class NoFixturePlug(Plugin):
     enabled = True
 
     def options(self, parser, env):
-        print "options"        
+        print("options")
         pass
     
     def configure(self, options, conf):
-        print "configure"
+        print("configure")
         pass
 
     def loadTestsFromTestCase(self, testCaseClass):
-        print "Called!"
+        print("Called!")
         class Derived(testCaseClass):
             def setUp(self):
                 pass
             def tearDown(self):
                 pass
         Derived.__qualname__ = Derived.__name__
-        # must use nose loader here because the default loader in 2.3
+        # must use xnose loader here because the default loader in 2.3
         # won't load tests from base classes
         l = loader.TestLoader()
         return l.loadTestsFromTestCase(Derived)
@@ -47,7 +47,7 @@ class TestLoadTestsFromTestCaseHook(PluginTester, unittest.TestCase):
         expect = [
             'test_value (%s.Derived) ... ERROR' % __name__,
             'test_value (tests.Tests) ... ok']
-        print str(self.output)
+        print(str(self.output))
         for line in self.output:
             if expect:
                 self.assertEqual(line.strip(), expect.pop(0))

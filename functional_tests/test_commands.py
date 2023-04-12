@@ -1,9 +1,13 @@
 import os
 import sys
 import unittest
-from nose.plugins.skip import SkipTest
-from nose import commands
-from StringIO import StringIO
+from xnose.plugins.skip import SkipTest
+from xnose import commands
+
+try:
+  from StringIO import StringIO
+except ImportError:
+  from io import StringIO
 
 support = os.path.join(
     os.path.dirname(__file__), 'support', 'issue191')
@@ -23,21 +27,21 @@ class TestCommands(unittest.TestCase):
         os.chdir(self.dir)
         sys.stderr = self.stderr
     
-    def test_setup_nosetests_command_works(self):
+    def test_setup_xnosetests_command_works(self):
         from setuptools.dist import Distribution
         buf = StringIO()
         sys.stderr = buf
-        cmd = commands.nosetests(
+        cmd = commands.xnosetests(
             Distribution(attrs={'script_name': 'setup.py',
                                 'package_dir': {'issue191': support}}))
         cmd.finalize_options()
         ## FIXME why doesn't Config see the chdir above?
-        print cmd._nosetests__config.workingDir
-        cmd._nosetests__config.workingDir = support
-        cmd._nosetests__config.stream = buf
+        print(cmd._xnosetests__config.workingDir)
+        cmd._xnosetests__config.workingDir = support
+        cmd._xnosetests__config.stream = buf
         try:
             cmd.run()
-        except SystemExit, e:
+        except SystemExit as e:
             self.assertFalse(e.args[0], buf.getvalue())
         else:
             self.fail("cmd.run() did not exit")

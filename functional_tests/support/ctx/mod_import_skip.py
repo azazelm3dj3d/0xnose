@@ -1,4 +1,4 @@
-from nose import SkipTest
+from xnose import SkipTest
 
 raise SkipTest("Don't run me")
 

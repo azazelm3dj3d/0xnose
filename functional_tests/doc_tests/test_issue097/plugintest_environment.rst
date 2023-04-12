@@ -1,8 +1,8 @@
-nose.plugins.plugintest, os.environ and sys.argv
+xnose.plugins.plugintest, os.environ and sys.argv
 ------------------------------------------------
 
-:class:`nose.plugins.plugintest.PluginTester` and
-:func:`nose.plugins.plugintest.run` are utilities for testing nose
+:class:`xnose.plugins.plugintest.PluginTester` and
+:func:`xnose.plugins.plugintest.run` are utilities for testing xnose
 plugins.  When testing plugins, it should be possible to control the
 environment seen plugins under test, and that environment should never
 be affected by ``os.environ`` or ``sys.argv``.
@@ -10,13 +10,13 @@ be affected by ``os.environ`` or ``sys.argv``.
     >>> import os
     >>> import sys
     >>> import unittest
-    >>> import nose.config
-    >>> from nose.plugins import Plugin
-    >>> from nose.plugins.builtin import FailureDetail, Capture
-    >>> from nose.plugins.plugintest import PluginTester
+    >>> import xnose.config
+    >>> from xnose.plugins import Plugin
+    >>> from xnose.plugins.builtin import FailureDetail, Capture
+    >>> from xnose.plugins.plugintest import PluginTester
 
 Our test plugin takes no command-line arguments and simply prints the
-environment it's given by nose.
+environment it's given by xnose.
 
     >>> class PrintEnvPlugin(Plugin):
     ...     name = "print-env"
@@ -32,16 +32,16 @@ environment it's given by nose.
     ...         print "env:", env
 
 To test the argv, we use a config class that prints the argv it's
-given by nose.  We need to monkeypatch nose.config.Config, so that we
+given by xnose.  We need to monkeypatch xnose.config.Config, so that we
 can test the cases where that is used as the default.
 
-    >>> old_config = nose.config.Config
+    >>> old_config = xnose.config.Config
     >>> class PrintArgvConfig(old_config):
     ...
     ...     def configure(self, argv=None, doc=None):
     ...         print "argv:", argv
     ...         old_config.configure(self, argv, doc)
-    >>> nose.config.Config = PrintArgvConfig
+    >>> xnose.config.Config = PrintArgvConfig
 
 The class under test, PluginTester, is designed to be used by
 subclassing.
@@ -64,12 +64,12 @@ For the purposes of this test, we need a known ``os.environ`` and
     >>> os.environ = {"spam": "eggs"}
     >>> sys.argv = ["spamtests"]
 
-PluginTester always uses the [nosetests, self.activate] as its argv.
+PluginTester always uses the [xnosetests, self.activate] as its argv.
 If ``env`` is not overridden, the default is an empty ``env``.
 
     >>> tester = Tester()
     >>> tester.setUp()
-    argv: ['nosetests', '-v']
+    argv: ['xnosetests', '-v']
     env: {}
 
 An empty ``env`` is respected...
@@ -78,7 +78,7 @@ An empty ``env`` is respected...
     ...    env = {}
     >>> tester = EmptyEnvTester()
     >>> tester.setUp()
-    argv: ['nosetests', '-v']
+    argv: ['xnosetests', '-v']
     env: {}
 
 ... as is a non-empty ``env``.
@@ -87,16 +87,16 @@ An empty ``env`` is respected...
     ...    env = {"foo": "bar"}
     >>> tester = NonEmptyEnvTester()
     >>> tester.setUp()
-    argv: ['nosetests', '-v']
+    argv: ['xnosetests', '-v']
     env: {'foo': 'bar'}
 
 
-``nose.plugins.plugintest.run()`` should work analogously.
+``xnose.plugins.plugintest.run()`` should work analogously.
 
-    >>> from nose.plugins.plugintest import run_buffered as run
+    >>> from xnose.plugins.plugintest import run_buffered as run
     >>> run(suite=unittest.TestSuite(tests=[]),
     ...     plugins=[PrintEnvPlugin()]) # doctest: +REPORT_NDIFF
-    argv: ['nosetests', '-v']
+    argv: ['xnosetests', '-v']
     env: {}
     <BLANKLINE>
     ----------------------------------------------------------------------
@@ -106,7 +106,7 @@ An empty ``env`` is respected...
     >>> run(env={},
     ...     suite=unittest.TestSuite(tests=[]),
     ...     plugins=[PrintEnvPlugin()]) # doctest: +REPORT_NDIFF
-    argv: ['nosetests', '-v']
+    argv: ['xnosetests', '-v']
     env: {}
     <BLANKLINE>
     ----------------------------------------------------------------------
@@ -116,7 +116,7 @@ An empty ``env`` is respected...
     >>> run(env={"foo": "bar"},
     ...     suite=unittest.TestSuite(tests=[]),
     ...     plugins=[PrintEnvPlugin()]) # doctest: +REPORT_NDIFF
-    argv: ['nosetests', '-v']
+    argv: ['xnosetests', '-v']
     env: {'foo': 'bar'}
     <BLANKLINE>
     ----------------------------------------------------------------------
@@ -139,12 +139,12 @@ An explicit argv parameter is honoured:
 
 An explicit config parameter with an env is honoured:
 
-    >>> from nose.plugins.manager import PluginManager
+    >>> from xnose.plugins.manager import PluginManager
     >>> manager = PluginManager(plugins=[PrintEnvPlugin()])
     >>> config = PrintArgvConfig(env={"foo": "bar"}, plugins=manager)
     >>> run(config=config,
     ...     suite=unittest.TestSuite(tests=[])) # doctest: +REPORT_NDIFF
-    argv: ['nosetests', '-v']
+    argv: ['xnosetests', '-v']
     env: {'foo': 'bar'}
     <BLANKLINE>
     ----------------------------------------------------------------------
@@ -157,4 +157,4 @@ Clean up.
 
     >>> os.environ = old_environ
     >>> sys.argv = old_argv
-    >>> nose.config.Config = old_config
+    >>> xnose.config.Config = old_config

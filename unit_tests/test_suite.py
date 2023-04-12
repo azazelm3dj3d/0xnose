@@ -1,6 +1,6 @@
-from nose.config import Config
-from nose import case
-from nose.suite import LazySuite, ContextSuite, ContextSuiteFactory, \
+from xnose.config import Config
+from xnose import case
+from xnose.suite import LazySuite, ContextSuite, ContextSuiteFactory, \
      ContextList
 import imp
 import sys
@@ -43,10 +43,10 @@ class TestLazySuite(unittest.TestCase):
         lazytests = []
         nonlazytests = []
         for t in lazy:
-            print "lazy %s" % t
+            print("lazy %s" % t)
             lazytests.append(t)
         for t in nonlazy:
-            print "nonlazy %s" % t
+            print("nonlazy %s" % t)
             nonlazytests.append(t)
         slazy = map(str, lazytests)
         snonlazy = map(str, nonlazytests)
@@ -70,7 +70,7 @@ class TestLazySuite(unittest.TestCase):
 
         count = 0
         for test in lazy:
-            print test
+            print(test)
             assert test
             count += 1
         self.assertEqual(count, 2, "Expected 2 tests, got %s" % count)

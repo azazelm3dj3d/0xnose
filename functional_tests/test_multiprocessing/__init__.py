@@ -1,9 +1,9 @@
 import os
 from unittest import TestCase
 
-from nose.plugins import PluginTester
-from nose.plugins.skip import SkipTest
-from nose.plugins.multiprocess import MultiProcess
+from xnose.plugins import PluginTester
+from xnose.plugins.skip import SkipTest
+from xnose.plugins.multiprocess import MultiProcess
 
 support = os.path.join(os.path.dirname(__file__), 'support')
 

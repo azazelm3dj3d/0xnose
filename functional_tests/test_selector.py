@@ -1,6 +1,6 @@
 import os
 import unittest
-from nose.selector import Selector, TestAddress
+from xnose.selector import Selector, TestAddress
 
 support = os.path.abspath(os.path.join(os.path.dirname(__file__), 'support'))
 

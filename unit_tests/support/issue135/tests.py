@@ -1,6 +1,7 @@
-import unittest
+import unittest, sys
 
 class TestIssue135(unittest.TestCase):
     def test_issue135(self):
-        print "something"
+        print('something')
+
         raise KeyError("fake")
