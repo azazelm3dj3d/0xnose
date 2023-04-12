@@ -198,7 +198,7 @@ class TestDoctestPlugin(unittest.TestCase):
             assert test.address(), "Test %s has no address"
         
     def test_collect_no_collect(self):
-        # bug http://xnose.python-hosting.com/ticket/55 
+        # bug http://nose.python-hosting.com/ticket/55 
         # we got "iteration over non-sequence" when no files match
         here = os.path.abspath(os.path.dirname(__file__))
         support = os.path.join(here, 'support')

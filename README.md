@@ -1,6 +1,6 @@
 # xNose
 
-xNose is a forked repository of [Nose](https://github.com/nose-devs/xnose). xNose was created to offer improved functionality and bug fixes missing in the original project, which is now deprecated. The primary goal of this fork is to build a compatible testing environment for Python 3.x based on the Nose project.
+xNose is a forked repository of [Nose](https://github.com/nose-devs/nose). xNose was created to offer improved functionality and bug fixes missing in the original project, which is now deprecated. The primary goal of this fork is to build a compatible testing environment for Python 3.x based on the Nose project.
 
 If you're starting a new project, I recommend using [Nose2](https://github.com/nose-devs/nose2) for a more stable and dedicated environment. The purpose of xNose is to offer support for current development projects running Nose as their testing infrastructure, but unable to run a full suite of tests due to compatibility issues with newer versions of Python.
 

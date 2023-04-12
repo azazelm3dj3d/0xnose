@@ -178,7 +178,7 @@ the xnose source distribution. There is a list of third-party plugins
 
 .. _examples/html_plugin/htmlplug.py: http://python-xnose.googlecode.com/svn/trunk/examples/html_plugin/htmlplug.py
 .. _examples: http://python-xnose.googlecode.com/svn/trunk/examples
-.. _on jottit: http://xnose-plugins.jottit.com/
+.. _on jottit: http://nose-plugins.jottit.com/
 
 """
 from xnose.plugins.base import Plugin
