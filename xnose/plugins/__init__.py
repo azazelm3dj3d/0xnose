@@ -176,8 +176,8 @@ See any builtin plugin or example plugin in the examples_ directory in
 the xnose source distribution. There is a list of third-party plugins
 `on jottit`_.
 
-.. _examples/html_plugin/htmlplug.py: http://python-xnose.googlecode.com/svn/trunk/examples/html_plugin/htmlplug.py
-.. _examples: http://python-xnose.googlecode.com/svn/trunk/examples
+.. _examples/html_plugin/htmlplug.py: http://python-nose.googlecode.com/svn/trunk/examples/html_plugin/htmlplug.py
+.. _examples: http://python-nose.googlecode.com/svn/trunk/examples
 .. _on jottit: http://nose-plugins.jottit.com/
 
 """

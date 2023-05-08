@@ -1,8 +1,5 @@
 include AUTHORS
-include CHANGELOG
-include NEWS
 include README.md
-include lgpl.txt
 include xnosetests.1
 include install-rpm.sh
 include bin/xnosetests

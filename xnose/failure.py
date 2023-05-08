@@ -33,6 +33,8 @@ class Failure(unittest.TestCase):
     def address(self):
         return self._address
     
+    # TODO: Fix this execption
+    # Adding a TypeError check causes all tests to pass, even if they're not supposed to
     def runTest(self):
         if self.tb is not None:
             if is_base_exception(self.exc_val):

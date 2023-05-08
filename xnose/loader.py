@@ -150,7 +150,7 @@ class TestLoader(unittest.TestLoader):
         sort_list(entries, regex_last_key(self.config.testMatch))
         for entry in entries:
             # this hard-coded initial-dot test will be removed:
-            # http://code.google.com/p/python-xnose/issues/detail?id=82
+            # http://code.google.com/p/python-nose/issues/detail?id=82
             if entry.startswith('.'):
                 continue
             if src(entry) == '__init__.py':
@@ -165,7 +165,7 @@ class TestLoader(unittest.TestLoader):
                 is_dir = op_isdir(entry_path)
                 if is_dir:
                     # this hard-coded initial-underscore test will be removed:
-                    # http://code.google.com/p/python-xnose/issues/detail?id=82
+                    # http://code.google.com/p/python-nose/issues/detail?id=82
                     if entry.startswith('_'):
                         continue
                     wanted = self.selector.wantDirectory(entry_path)
