@@ -1,6 +1,6 @@
-from xnose.config import Config
-from xnose import case
-from xnose.suite import LazySuite, ContextSuite, ContextSuiteFactory, \
+from nose.config import Config
+from nose import case
+from nose.suite import LazySuite, ContextSuite, ContextSuiteFactory, \
      ContextList
 import imp
 import sys

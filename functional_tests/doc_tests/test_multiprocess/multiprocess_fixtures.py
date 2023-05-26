@@ -1,5 +1,5 @@
-from xnose.plugins.skip import SkipTest
-from xnose.plugins.multiprocess import MultiProcess
+from nose.plugins.skip import SkipTest
+from nose.plugins.multiprocess import MultiProcess
 
 _multiprocess_can_split_ = True
 

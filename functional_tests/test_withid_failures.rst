@@ -1,7 +1,7 @@
     >>> import os
     >>> import sys
-    >>> from xnose.plugins.plugintest import run_buffered as run
-    >>> from xnose.plugins.testid import TestId
+    >>> from nose.plugins.plugintest import run_buffered as run
+    >>> from nose.plugins.testid import TestId
     >>> import tempfile
     >>> idfile = tempfile.mktemp()
     >>> support = os.path.join(os.path.dirname(__file__), 'support', 'id_fails')

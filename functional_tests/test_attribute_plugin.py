@@ -1,8 +1,8 @@
 import os
 import sys
 import unittest
-from xnose.plugins.attrib import AttributeSelector
-from xnose.plugins import PluginTester
+from nose.plugins.attrib import AttributeSelector
+from nose.plugins import PluginTester
 
 support = os.path.join(os.path.dirname(__file__), 'support')
 

@@ -2,16 +2,16 @@ import logging
 import os
 import re
 import unittest
-import xnose.selector
-from xnose.config import Config
-from xnose.selector import log, Selector
-from xnose.util import absdir
+import nose.selector
+from nose.config import Config
+from nose.selector import log, Selector
+from nose.util import absdir
 from mock import mod
 
 class TestSelector(unittest.TestCase):
 
     def tearDown(self):
-        logging.getLogger('xnose.selector').setLevel(logging.WARN)
+        logging.getLogger('nose.selector').setLevel(logging.WARN)
     
     def test_ignore_files_default(self):
         """A default configuration should always skip some 'hidden' files."""
@@ -111,7 +111,7 @@ class TestSelector(unittest.TestCase):
         
     def test_want_file(self):
 
-        #logging.getLogger('xnose.selector').setLevel(logging.DEBUG)
+        #logging.getLogger('nose.selector').setLevel(logging.DEBUG)
         #logging.basicConfig()
         
         c = Config()

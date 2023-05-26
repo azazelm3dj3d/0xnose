@@ -1,5 +1,5 @@
 import unittest
-from xnose.suite import LazySuite
+from nose.suite import LazySuite
 from helpers import iter_compat
 
 def gen():

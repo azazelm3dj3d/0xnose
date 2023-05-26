@@ -2,20 +2,20 @@ import logging
 import os
 import sys
 import unittest
-import xnose.plugins
+import nose.plugins
 from optparse import OptionParser
 import tempfile
 from warnings import warn, filterwarnings, resetwarnings
 
-from xnose import SkipTest
-from xnose.pyversion import unbound_method
-from xnose.config import Config
-from xnose.plugins.attrib import AttributeSelector
-from xnose.plugins.base import Plugin
-from xnose.plugins.cover import Coverage
-from xnose.plugins.doctests import Doctest
-from xnose.plugins.failuredetail import FailureDetail
-from xnose.plugins.prof import Profile
+from nose import SkipTest
+from nose.pyversion import unbound_method
+from nose.config import Config
+from nose.plugins.attrib import AttributeSelector
+from nose.plugins.base import Plugin
+from nose.plugins.cover import Coverage
+from nose.plugins.doctests import Doctest
+from nose.plugins.failuredetail import FailureDetail
+from nose.plugins.prof import Profile
 
 from mock import *
 

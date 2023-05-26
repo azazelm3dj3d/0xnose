@@ -1,4 +1,4 @@
-    >>> from xnose.plugins.errorclass import ErrorClass, ErrorClassPlugin
+    >>> from nose.plugins.errorclass import ErrorClass, ErrorClassPlugin
     >>> class X(Exception):
     ...     pass
     >>> xes = ErrorClass(X, label='XXX')

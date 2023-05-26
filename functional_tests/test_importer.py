@@ -1,8 +1,8 @@
 import os
 import sys
 import unittest
-from xnose.importer import Importer
-from xnose.plugins.skip import SkipTest
+from nose.importer import Importer
+from nose.plugins.skip import SkipTest
 
 
 class TestImporter(unittest.TestCase):
@@ -158,11 +158,11 @@ class TestImporter(unittest.TestCase):
         mod_sys_imported = __import__('mod')
         mod_nose_imported = imp.importFromDir(d1, 'mod')
         assert mod_nose_imported is mod_sys_imported, \
-               "xnose reimported a module in sys.modules from the same path"
+               "nose reimported a module in sys.modules from the same path"
 
         mod_nose_imported2 = imp.importFromDir(d2, 'mod')
         assert mod_nose_imported2 != mod_sys_imported, \
-               "xnose failed to reimport same name, different dir"
+               "nose failed to reimport same name, different dir"
 
     def test_sys_modules_symlinked_package_no_reload(self):
         if not self.has_symlinks:
@@ -176,13 +176,13 @@ class TestImporter(unittest.TestCase):
         mod_sys_imported = __import__('pak')
         mod_nose_imported = imp.importFromDir(d2, 'pak')
         assert mod_nose_imported is mod_sys_imported, \
-               "xnose reimported a module in sys.modules from the same file"
+               "nose reimported a module in sys.modules from the same file"
 
         # Module inside symlinked package
         mod_sys_imported = __import__('pak.mod', fromlist=['mod'])
         mod_nose_imported = imp.importFromDir(d2, 'pak.mod')
         assert mod_nose_imported is mod_sys_imported, \
-               ("xnose reimported a module in sys.modules from the same file",
+               ("nose reimported a module in sys.modules from the same file",
                mod_sys_imported.__file__, mod_nose_imported.__file__)
 
     def test_import_pkg_from_path_fpw(self):

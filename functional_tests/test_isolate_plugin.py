@@ -1,8 +1,8 @@
 import os
 import sys
 import unittest
-from xnose.plugins.isolate import IsolationPlugin
-from xnose.plugins import PluginTester
+from nose.plugins.isolate import IsolationPlugin
+from nose.plugins import PluginTester
 
 support = os.path.join(os.path.dirname(__file__), 'support')
 

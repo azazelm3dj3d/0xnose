@@ -4,8 +4,8 @@ Multiprocess test collection from packages
 Tests that the multiprocess plugin correctly collects tests from packages
 
     >>> import os
-    >>> from xnose.plugins.plugintest import run_buffered as run
-    >>> from xnose.plugins.multiprocess import MultiProcess
+    >>> from nose.plugins.plugintest import run_buffered as run
+    >>> from nose.plugins.multiprocess import MultiProcess
     >>> support = os.path.join(os.path.dirname(__file__), 'support')
     >>> issue270 = os.path.join(support, 'issue270')
 

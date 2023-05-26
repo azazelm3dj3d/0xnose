@@ -1,12 +1,12 @@
 import unittest
-from xnose.plugins.base import IPluginInterface
+from nose.plugins.base import IPluginInterface
 
 class TestPluginInterfaces(unittest.TestCase):
 
     def test_api_methods_present(self):
 
-        from xnose.loader import TestLoader
-        from xnose.selector import Selector
+        from nose.loader import TestLoader
+        from nose.selector import Selector
 
         
         exclude = [ 'loadTestsFromGenerator',

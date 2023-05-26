@@ -1,11 +1,11 @@
 import os
 import sys
 import unittest
-import xnose
-from xnose import case
-from xnose.pyversion import unbound_method
+import nose
+from nose import case
+from nose.pyversion import unbound_method
 # don't import * -- some util functions look testlike
-from xnose import util
+from nose import util
 
 np = os.path.normpath
 
@@ -98,8 +98,8 @@ class TestUtils(unittest.TestCase):
                                                               'Foo.bar')
         assert test_address(f) == (me, __name__, 'Foo')
         assert test_address(f.bar) == (me, __name__, 'Foo.bar')
-        assert test_address(xnose) == (
-            util.src(absfile(xnose.__file__)), 'xnose', None)
+        assert test_address(nose) == (
+            util.src(absfile(nose.__file__)), 'nose', None)
 
         # test passing the actual test callable, as the
         # missed test plugin must do

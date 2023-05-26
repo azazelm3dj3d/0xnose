@@ -1,10 +1,10 @@
 import unittest
-from xnose import case
-from xnose.config import Config
-from xnose.plugins import debug
-from xnose.plugins.manager import PluginManager
-from xnose.plugins.skip import Skip, SkipTest
-from xnose.proxy import ResultProxyFactory
+from nose import case
+from nose.config import Config
+from nose.plugins import debug
+from nose.plugins.manager import PluginManager
+from nose.plugins.skip import Skip, SkipTest
+from nose.proxy import ResultProxyFactory
 
 
 class StubPdb:

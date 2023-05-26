@@ -1,7 +1,7 @@
 import logging
 import os
 import unittest
-from xnose.config import Config
+from nose.config import Config
 
 support = os.path.join(os.path.dirname(__file__), 'support')
 

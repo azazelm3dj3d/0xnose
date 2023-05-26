@@ -3,7 +3,7 @@ import sys
 import unittest
 import warnings
 # from cStringIO import StringIO
-from xnose.result import _TextTestResult
+from nose.result import _TextTestResult
 here = os.path.dirname(__file__)
 support = os.path.join(here, 'support')
 
@@ -31,13 +31,13 @@ class TestNoseTestCollector(unittest.TestCase):
         # we don't need to see our own warnings
         warnings.filterwarnings(action='ignore',
                                 category=RuntimeWarning,
-                                module='xnose.plugins.manager')
+                                module='nose.plugins.manager')
 
         try:
             os.chdir(os.path.join(support, 'issue038'))
             unittest.TestProgram(
                 None, None,
-                argv=['test_collector', '-v', 'xnose.collector'],
+                argv=['test_collector', '-v', 'nose.collector'],
                 testRunner=runner)
         except SystemExit:
             pass

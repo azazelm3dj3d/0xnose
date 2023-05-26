@@ -1,9 +1,9 @@
 import imp
 import sys
-from xnose.config import Config
-from xnose import proxy
-from xnose.plugins.manager import NoPlugins
-from xnose.util import odict
+from nose.config import Config
+from nose import proxy
+from nose.plugins.manager import NoPlugins
+from nose.util import odict
 
 
 def mod(name):

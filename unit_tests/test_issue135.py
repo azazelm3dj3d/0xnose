@@ -1,6 +1,6 @@
 import unittest
 import os
-from xnose import main
+from nose import main
 import sys
 import re
 try:
@@ -19,7 +19,7 @@ class TestIssue135(unittest.TestCase):
         old_argv = sys.argv
         old_stderr = sys.stderr
         sys.stderr = stringio
-        sys.argv = ["xnosetests", wd]
+        sys.argv = ["nosetests", wd]
         try:
             main(exit=False)
         finally:

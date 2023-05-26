@@ -3,10 +3,10 @@ import codecs
 import os
 import sys
 import unittest
-from xnose.plugins.capture import Capture
-from xnose.plugins.xunit import Xunit
-from xnose.plugins.skip import Skip
-from xnose.plugins import PluginTester
+from nose.plugins.capture import Capture
+from nose.plugins.xunit import Xunit
+from nose.plugins.skip import Skip
+from nose.plugins import PluginTester
 
 support = os.path.join(os.path.dirname(__file__), 'support')
 xml_results_filename = os.path.join(support, "xunit.xml")
@@ -34,7 +34,7 @@ class TestXUnitPlugin(PluginTester, unittest.TestCase):
         print(result.encode('utf8', 'replace'))
         
         assert '<?xml version="1.0" encoding="UTF-8"?>' in result
-        assert '<testsuite name="xnosetests" tests="6" errors="2" failures="1" skip="1">' in result
+        assert '<testsuite name="nosetests" tests="6" errors="2" failures="1" skip="1">' in result
         assert '<testcase classname="test_xunit_as_suite.TestForXunit" name="test_error" time="' in result
         # TODO(Kumar) think of better x-platform code here that
         # does not confuse 2to3

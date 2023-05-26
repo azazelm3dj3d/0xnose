@@ -1,8 +1,8 @@
 import sys
-from xnose.exc import SkipTest
-from xnose.tools import *
-from xnose.twistedtools import *
-try:    
+from nose.exc import SkipTest
+from nose.tools import *
+from nose.twistedtools import *
+try:
     from twisted.internet.defer import Deferred
     from twisted.internet.error import DNSLookupError
 except ImportError:
@@ -91,5 +91,5 @@ test_timeout_expired = raises(TimeExpired)(
 
 
 if __name__ == '__main__':
-    from xnose import runmodule
+    from nose import runmodule
     runmodule()

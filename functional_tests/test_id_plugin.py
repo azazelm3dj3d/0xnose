@@ -4,9 +4,9 @@ import sys
 import tempfile
 import unittest
 
-from xnose.plugins import PluginTester
-from xnose.plugins.builtin import Doctest
-from xnose.plugins.builtin import TestId
+from nose.plugins import PluginTester
+from nose.plugins.builtin import Doctest
+from nose.plugins.builtin import TestId
 from cPickle import dump, load
 
 support = os.path.join(os.path.dirname(__file__), 'support')
@@ -251,7 +251,7 @@ class TestWithDoctestFileTests_2(PluginTester, unittest.TestCase):
 if __name__ == '__main__':
     import logging
     logging.basicConfig()
-    l = logging.getLogger('xnose.plugins.testid')
+    l = logging.getLogger('nose.plugins.testid')
     l.setLevel(logging.DEBUG)
     
     try:

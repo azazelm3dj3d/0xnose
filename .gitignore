@@ -2,7 +2,7 @@
 *.pyc
 *.pyo
 .DS_Store
-.xnose
+.nose
 *.egg-info
 *.bak
 *.rej
@@ -10,7 +10,7 @@
 *.orig
 example.cfg
 .coverage
-xnosetests.xml
+nosetests.xml
 xunit.xml
 _env
 doc/.build

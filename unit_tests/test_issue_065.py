@@ -1,5 +1,5 @@
 import os
-from xnose import loader
+from nose import loader
 import unittest
 
 support = os.path.join(os.path.dirname(__file__), 'support')

@@ -1,5 +1,5 @@
 """
-An example of how to create a simple xnose plugin.
+An example of how to create a simple nose plugin.
 
 """
 try:
@@ -15,11 +15,11 @@ setup(
     version = '0.1',
     author = 'Jason Pellerin',
     author_email = 'jpellerin+nose@gmail.com',
-    description = 'Example xnose plugin',
+    description = 'Example nose plugin',
     license = 'GNU LGPL',
     py_modules = ['plug'],
     entry_points = {
-        'xnose.plugins.0.10': [
+        'nose.plugins.0.10': [
             'example = plug:ExamplePlugin'
             ]
         }

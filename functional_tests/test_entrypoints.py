@@ -1,6 +1,6 @@
 import os
 import sys
-from xnose.exc import SkipTest
+from nose.exc import SkipTest
 
 try:
     from pkg_resources import EntryPoint

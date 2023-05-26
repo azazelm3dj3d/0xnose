@@ -1,9 +1,9 @@
 import os
 import sys
 import unittest
-from xnose.plugins.failuredetail import FailureDetail
-from xnose.plugins.capture import Capture
-from xnose.plugins import PluginTester
+from nose.plugins.failuredetail import FailureDetail
+from nose.plugins.capture import Capture
+from nose.plugins import PluginTester
 
 support = os.path.join(os.path.dirname(__file__), 'support')
 

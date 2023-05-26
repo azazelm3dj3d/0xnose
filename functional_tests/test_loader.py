@@ -4,13 +4,13 @@ import unittest
 from difflib import ndiff
 from cStringIO import StringIO
 
-from xnose.config import Config
-from xnose.plugins.allmodules import AllModules
-from xnose.plugins.manager import PluginManager
-from xnose.plugins.skip import Skip
-from xnose import loader
-from xnose import suite
-from xnose.result import _TextTestResult
+from nose.config import Config
+from nose.plugins.allmodules import AllModules
+from nose.plugins.manager import PluginManager
+from nose.plugins.skip import Skip
+from nose import loader
+from nose import suite
+from nose.result import _TextTestResult
 try:
     # 2.7+
     from unittest.runner import _WritelnDecorator
@@ -503,5 +503,5 @@ class TreePrintContextSuite(suite.ContextSuite):
 if __name__ == '__main__':
     #import logging
     #logging.basicConfig() #level=logging.DEBUG)
-    #logging.getLogger('xnose.suite').setLevel(logging.DEBUG)
+    #logging.getLogger('nose.suite').setLevel(logging.DEBUG)
     unittest.main()

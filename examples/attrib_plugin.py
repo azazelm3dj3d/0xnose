@@ -1,27 +1,27 @@
 """
-Examples of test function/method attribute usage with patched xnose
+Examples of test function/method attribute usage with patched nose
 
 Simple syntax (-a, --attr) examples:
-  * xnosetests -a status=stable
+  * nosetests -a status=stable
     => only test cases with attribute "status" having value "stable"
 
-  * xnosetests -a priority=2,status=stable
+  * nosetests -a priority=2,status=stable
     => both attributes must match
 
-  * xnosetests -a tags=http
+  * nosetests -a tags=http
     => attribute list "tags" must contain value "http" (see test_foobar()
        below for definition)
 
-  * xnosetests -a slow
+  * nosetests -a slow
     => attribute "slow" must be defined and its value cannot equal to False
        (False, [], "", etc...)
 
-  * xnosetests -a !slow
+  * nosetests -a !slow
     => attribute "slow" must NOT be defined or its value must be equal to False
 
 Eval expression syntax (-A, --eval-attr) examples:
-  * xnosetests -A "not slow"
-  * xnosetests -A "(priority > 5) and not slow"
+  * nosetests -A "not slow"
+  * nosetests -A "(priority > 5) and not slow"
   
 This example and the accompanied patch is in public domain, free for any use.
 
@@ -70,14 +70,14 @@ class TestSomething:
 # class methods "inherit" attributes from the class but can override them
 class TestOverride:
     value = "class"
-    # run all methods with "xnosetests -a value"
+    # run all methods with "nosetests -a value"
 
     @attr(value = "method")
     def test_override(self):
-      """run with "xnosetests -a value=method"""
+      """run with "nosetests -a value=method"""
       print("override")
     
     def test_inherit(self):
-      """run with "xnosetests -a value=class"""
+      """run with "nosetests -a value=class"""
       print("inherit")
   

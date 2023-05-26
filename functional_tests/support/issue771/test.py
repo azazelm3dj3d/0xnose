@@ -1,4 +1,4 @@
-from xnose.plugins.attrib import attr
+from nose.plugins.attrib import attr
 
 from unittest import TestCase
 

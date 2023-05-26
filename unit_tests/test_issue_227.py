@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-from xnose.plugins.skip import SkipTest
+from nose.plugins.skip import SkipTest
 import sys
 
 

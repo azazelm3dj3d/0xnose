@@ -2,11 +2,11 @@ import pickle
 import sys
 import unittest
 
-from xnose import case
-from xnose.plugins import multiprocess
-from xnose.plugins.skip import SkipTest
-from xnose.config import Config
-from xnose.loader import TestLoader
+from nose import case
+from nose.plugins import multiprocess
+from nose.plugins.skip import SkipTest
+from nose.config import Config
+from nose.loader import TestLoader
 try:
     # 2.7+
     from unittest.runner import _WritelnDecorator

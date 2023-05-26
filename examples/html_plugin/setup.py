@@ -12,11 +12,11 @@ setup(
     version = '0.1',
     author = 'Jason Pellerin',
     author_email = 'jpellerin+nose@gmail.com',
-    description = 'Example xnose html output plugin',
+    description = 'Example nose html output plugin',
     license = 'GNU LGPL',
     py_modules = ['htmlplug'],
     entry_points = {
-        'xnose.plugins.0.10': [
+        'nose.plugins.0.10': [
             'htmlout = htmlplug:HtmlOutput'
             ]
         }

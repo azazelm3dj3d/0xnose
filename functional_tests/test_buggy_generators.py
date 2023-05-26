@@ -1,9 +1,9 @@
 import os
 import unittest
 # from cStringIO import StringIO
-from xnose.core import TestProgram
-from xnose.config import Config
-from xnose.result import _TextTestResult
+from nose.core import TestProgram
+from nose.config import Config
+from nose.result import _TextTestResult
 
 try:
   from StringIO import StringIO
@@ -26,7 +26,7 @@ class TestBuggyGenerators(unittest.TestCase):
         stream = StringIO()
         runner = TestRunner(stream=stream)
         prog = TestProgram(
-            argv=['xnosetests',
+            argv=['nosetests',
                   os.path.join(support, 'test_buggy_generators.py')],
             testRunner=runner,
             config=Config(),

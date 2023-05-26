@@ -1,8 +1,8 @@
 import unittest
-import xnose.selector
-from xnose.config import Config
-from xnose.plugins.base import Plugin
-from xnose.plugins.manager import PluginManager
+import nose.selector
+from nose.config import Config
+from nose.plugins.base import Plugin
+from nose.plugins.manager import PluginManager
 
 class TestSelectorPlugins(unittest.TestCase):
 
@@ -14,8 +14,8 @@ class TestSelectorPlugins(unittest.TestCase):
                 return None
 
         c = Config(plugins=PluginManager(plugins=[EvilSelector()]))
-        s = xnose.selector.Selector(c)
-        s2 = xnose.selector.Selector(Config())
+        s = nose.selector.Selector(c)
+        s2 = nose.selector.Selector(Config())
         
         assert s.wantFile('test_neutral.py')
         assert s2.wantFile('test_neutral.py')

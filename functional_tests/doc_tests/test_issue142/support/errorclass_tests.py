@@ -1,5 +1,5 @@
 from errorclass_failure_plugin import Todo
-from xnose import SkipTest, DeprecatedTest
+from nose import SkipTest, DeprecatedTest
 
 def test_todo():
     raise Todo('fix me')

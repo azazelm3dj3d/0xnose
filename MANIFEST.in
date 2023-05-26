@@ -1,13 +1,13 @@
 include AUTHORS
 include README.md
-include xnosetests.1
+include nosetests.1
 include install-rpm.sh
-include bin/xnosetests
+include bin/nosetests
 include distribute_setup.py
 include selftest.py
 include setup3lib.py
 include patch.py
-include xnose/usage.txt
+include nose/usage.txt
 graft doc
 graft examples
 graft unit_tests

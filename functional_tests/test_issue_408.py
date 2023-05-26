@@ -1,8 +1,8 @@
 import os
 import unittest
 
-from xnose.plugins import Plugin, PluginTester
-#from xnose.plugins.builtin import FailureDetail, Capture, Doctest
+from nose.plugins import Plugin, PluginTester
+#from nose.plugins.builtin import FailureDetail, Capture, Doctest
 
 support = os.path.join(os.path.dirname(__file__), 'support', 'issue408')
 

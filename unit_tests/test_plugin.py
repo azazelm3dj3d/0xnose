@@ -1,13 +1,13 @@
 import optparse
 import unittest
 
-import xnose.plugins
+import nose.plugins
 
 
 class OptionProcessingTests(unittest.TestCase):
 
     def test_enable_plugin(self):
-        class NamedPlugin(xnose.plugins.Plugin):
+        class NamedPlugin(nose.plugins.Plugin):
             name = "jim-bob"
         def parse_options(env, args_in):
             plugin = NamedPlugin()

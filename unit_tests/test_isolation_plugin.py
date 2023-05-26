@@ -1,2 +1,2 @@
 def test_lint():
-    import xnose.plugins.isolate
+    import nose.plugins.isolate

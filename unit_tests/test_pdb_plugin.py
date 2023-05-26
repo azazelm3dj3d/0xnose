@@ -1,7 +1,7 @@
 import sys
 import unittest
-from xnose.config import Config
-from xnose.plugins import debug
+from nose.config import Config
+from nose.plugins import debug
 from optparse import OptionParser
 from StringIO import StringIO
 

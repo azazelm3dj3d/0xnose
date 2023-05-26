@@ -1,6 +1,6 @@
 import unittest
-from xnose.config import Config
-from xnose.plugins.builtin import TestId
+from nose.config import Config
+from nose.plugins.builtin import TestId
 import mock
 
 class TestTestIdPlugin(unittest.TestCase):

@@ -2,8 +2,8 @@
 import sys
 import unittest
 from optparse import OptionParser
-from xnose.config import Config
-from xnose.plugins.capture import Capture
+from nose.config import Config
+from nose.plugins.capture import Capture
 
 class TestCapturePlugin(unittest.TestCase):
 

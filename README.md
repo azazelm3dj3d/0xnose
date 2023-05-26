@@ -1,58 +1,58 @@
-# xNose
+# nose
 
-xNose is a forked repository of [Nose](https://github.com/nose-devs/nose). xNose was created to offer improved functionality and bug fixes missing in the original project, which is now deprecated. The primary goal of this fork is to build a compatible testing environment for Python 3.x based on the Nose project.
+This is a forked repository of [nose](https://github.com/nose-devs/nose). This fork was created to offer improved functionality and bug fixes missing in the original project, which is now deprecated. The primary goal of this fork is to build a compatible testing environment for Python 3.x based on the Nose project.
 
-If you're starting a new project, I recommend using [Nose2](https://github.com/nose-devs/nose2) for a more stable and dedicated environment. The purpose of xNose is to offer support for current development projects running Nose as their testing infrastructure, but unable to run a full suite of tests due to compatibility issues with newer versions of Python.
+If you're starting a new project, I recommend using [Nose2](https://github.com/nose-devs/nose2) for a more stable and dedicated environment. The purpose of nose is to offer support for current development projects running Nose as their testing infrastructure, but unable to run a full suite of tests due to compatibility issues with newer versions of Python.
 
 NOTE: This project is still a heavy WIP. While the tests _may_ pass, I wouldn't recommend using this module until a release is available. The results may be inaccurate or indirectly modified.
 
 ## Basic usage
 
-Use the xnosetests script (after installation by setuptools):
+Use the nosetests script (after installation by setuptools):
 
-   xnosetests [options] [(optional) test files or directories]
+   nosetests [options] [(optional) test files or directories]
 
 In addition to passing command-line options, you may also put
-configuration options in a .noserc or xnose.cfg file in your home
+configuration options in a .noserc or nose.cfg file in your home
 directory. These are standard .ini-style config files. Put your
-xnosetests configuration in a [xnosetests] section, with the -- prefix
+nosetests configuration in a [nosetests] section, with the -- prefix
 removed:
 
-   [xnosetests]
+   [nosetests]
    verbosity=3
    with-doctest=1
 
 There is also possiblity to disable configuration files loading (might
-be useful when runnig i.e. tox and you don't want your global xnose
+be useful when runnig i.e. tox and you don't want your global nose
 config file to be used by tox). In order to ignore those configuration
 files simply set an environment variable "NOSE_IGNORE_CONFIG_FILES".
 
-There are several other ways to use the xnose test runner besides the
-*xnosetests* script. You may use xnose in a test script:
+There are several other ways to use the nose test runner besides the
+*nosetests* script. You may use nose in a test script:
 
-   import xnose
-   xnose.main()
+   import nose
+   nose.main()
 
 If you don't want the test script to exit with 0 on success and 1 on
-failure (like unittest.main), use xnose.run() instead:
+failure (like unittest.main), use nose.run() instead:
 
-   import xnose
-   result = xnose.run()
+   import nose
+   result = nose.run()
 
 *result* will be true if the test run succeeded, or false if any test
-failed or raised an uncaught exception. Lastly, you can run xnose.core
-directly, which will run xnose.main():
+failed or raised an uncaught exception. Lastly, you can run nose.core
+directly, which will run nose.main():
 
-   python /path/to/xnose/core.py
+   python /path/to/nose/core.py
 
-Please see the usage message for the xnosetests script for information
-about how to control which tests xnose runs, which plugins are loaded,
+Please see the usage message for the nosetests script for information
+about how to control which tests nose runs, which plugins are loaded,
 and the test output.
 
 
 ## Extended usage
 
-xnose collects tests automatically from python source files,
+nose collects tests automatically from python source files,
 directories and packages found in its working directory (which
 defaults to the current working directory). Any python source file,
 directory or package that matches the testMatch regular expression (by
@@ -71,7 +71,7 @@ may use the assert keyword or raise AssertionErrors to indicate test
 failure. TestCase subclasses may do the same or use the various
 TestCase methods available.
 
-**It is important to note that the default behavior of xnose is to not
+**It is important to note that the default behavior of nose is to not
 include tests from files which are executable.**  To include tests
 from such files, remove their executable bit or use the --exe flag
 (see 'Options' section below).
@@ -81,29 +81,29 @@ from such files, remove their executable bit or use the --exe flag
 
 To specify which tests to run, pass test names on the command line:
 
-   xnosetests only_test_this.py
+   nosetests only_test_this.py
 
 Test names specified may be file or module names, and may optionally
 indicate the test case to run by separating the module or file name
 from the test case name with a colon. Filenames may be relative or
 absolute. Examples:
 
-   xnosetests test.module
-   xnosetests another.test:TestCase.test_method
-   xnosetests a.test:TestCase
-   xnosetests /path/to/test/file.py:test_function
+   nosetests test.module
+   nosetests another.test:TestCase.test_method
+   nosetests a.test:TestCase
+   nosetests /path/to/test/file.py:test_function
 
-You may also change the working directory where xnose looks for tests
+You may also change the working directory where nose looks for tests
 by using the -w switch:
 
-   xnosetests -w /path/to/tests
+   nosetests -w /path/to/tests
 
 Note, however, that support for multiple -w arguments is now
-deprecated and will be removed in a future release. As of xnose 0.10,
+deprecated and will be removed in a future release. As of nose 0.10,
 you can get the same behavior by specifying the target directories
 *without* the -w switch:
 
-   xnosetests /path/to/tests /another/path/to/tests
+   nosetests /path/to/tests /another/path/to/tests
 
 Further customization of test selection and loading is possible
 through the use of plugins.
@@ -119,13 +119,13 @@ below.
 
 In addition to passing command-line options, you may also put
 configuration options in your project's *setup.cfg* file, or a .noserc
-or xnose.cfg file in your home directory. In any of these standard ini-
-style config files, you put your xnosetests configuration in a
-"[xnosetests]" section. Options are the same as on the command line,
+or nose.cfg file in your home directory. In any of these standard ini-
+style config files, you put your nosetests configuration in a
+"[nosetests]" section. Options are the same as on the command line,
 with the -- prefix removed. For options that are simple switches, you
 must supply a value:
 
-   [xnosetests]
+   [nosetests]
    verbosity=3
    with-doctest=1
 
@@ -137,17 +137,17 @@ with the "-c" option.
 ## Using Plugins
 
 
-There are numerous xnose plugins available via easy_install and
+There are numerous nose plugins available via easy_install and
 elsewhere. To use a plugin, just install it. The plugin will add
-command line options to xnosetests. To verify that the plugin is
+command line options to nosetests. To verify that the plugin is
 installed, run:
 
-   xnosetests --plugins
+   nosetests --plugins
 
 You can add -v or -vv to that command to show more information about
 each plugin.
 
-If you are running xnose.main() or xnose.run() from a script, you can
+If you are running nose.main() or nose.run() from a script, you can
 specify a list of plugins to use by passing a list of plugins with the
 plugins keyword argument.
 
@@ -155,10 +155,10 @@ plugins keyword argument.
 ## 0.9 plugins
 
 
-xnose 1.0 can use SOME plugins that were written for xnose 0.9. The
+nose 1.0 can use SOME plugins that were written for nose 0.9. The
 default plugin manager inserts a compatibility wrapper around 0.9
 plugins that adapts the changed plugin api calls. However, plugins
-that access xnose internals are likely to fail, especially if they
+that access nose internals are likely to fail, especially if they
 attempt to access test case or test suite classes. For example,
 plugins that try to determine if a test passed to startTest is an
 individual test or a suite will fail, partly because suites are no
@@ -169,7 +169,7 @@ that no longer exists.
 
 ## 0.10 and 0.11 plugins
 
-All plugins written for xnose 0.10 and 0.11 should work with xnose 1.0.
+All plugins written for nose 0.10 and 0.11 should work with nose 1.0.
 
 
 ## Options
@@ -177,7 +177,7 @@ All plugins written for xnose 0.10 and 0.11 should work with xnose 1.0.
 
 -V, --version
 
-   Output xnose version and exit
+   Output nose version and exit
 
 -p, --plugins
 
@@ -231,8 +231,8 @@ All plugins written for xnose 0.10 and 0.11 should work with xnose 1.0.
 -l=DEFAULT, --debug=DEFAULT
 
    Activate debug logging for one or more systems. Available debug
-   loggers: xnose, xnose.importer, xnose.inspector, xnose.plugins,
-   xnose.result and xnose.selector. Separate multiple names with a
+   loggers: nose, nose.importer, nose.inspector, nose.plugins,
+   nose.result and nose.selector. Separate multiple names with a
    comma.
 
 --debug-log=FILE
@@ -287,14 +287,14 @@ All plugins written for xnose 0.10 and 0.11 should work with xnose 1.0.
 
 --first-package-wins, --first-pkg-wins, --1st-pkg-wins
 
-   xnose's importer will normally evict a package from sys.modules if
+   nose's importer will normally evict a package from sys.modules if
    it sees a package with the same name in a different location. Set
    this option to disable that behavior.
 
 --no-byte-compile
 
-   Prevent xnose from byte-compiling the source into .pyc files while
-   xnose is scanning for and running tests.
+   Prevent nose from byte-compiling the source into .pyc files while
+   nose is scanning for and running tests.
 
 -a=ATTR, --attr=ATTR
 
@@ -334,7 +334,7 @@ All plugins written for xnose 0.10 and 0.11 should work with xnose 1.0.
    or other logger. Specify multiple loggers with comma:
    filter=foo,bar,baz. If any logger name is prefixed with a minus, eg
    filter=-foo, it will be excluded rather than included. Default:
-   exclude logging messages from xnose itself (-xnose). [NOSE_LOGFILTER]
+   exclude logging messages from nose itself (-nose). [NOSE_LOGFILTER]
 
 --logging-clear-handlers
 
@@ -528,12 +528,12 @@ All plugins written for xnose 0.10 and 0.11 should work with xnose 1.0.
 --xunit-file=FILE
 
    Path to xml file to store the xunit report in. Default is
-   xnosetests.xml in the working directory [NOSE_XUNIT_FILE]
+   nosetests.xml in the working directory [NOSE_XUNIT_FILE]
 
 --xunit-testsuite-name=PACKAGE
 
    Name of the testsuite in the xunit xml, generated by plugin.
-   Default test suite name is xnosetests.
+   Default test suite name is nosetests.
 
 --xunit-prefix-with-testsuite-name
 
@@ -555,9 +555,9 @@ All plugins written for xnose 0.10 and 0.11 should work with xnose 1.0.
 
 ## brp-compress
 
-On some platforms, brp-compress zips man pages without distutils knowing about it. This results in an error when building an rpm for xnose. The rpm build will report either that an unpackaged file was found, or that an expected package file was not found.
+On some platforms, brp-compress zips man pages without distutils knowing about it. This results in an error when building an rpm for nose. The rpm build will report either that an unpackaged file was found, or that an expected package file was not found.
 
 If you see such an error when using the bdist_rpm command, uncomment the
-'install_script' line in the '[bdist_rpm]' section of xnose's setup.cfg
+'install_script' line in the '[bdist_rpm]' section of nose's setup.cfg
 file. This should fix the problem by fixing the man page filename in the
 generated rpm spec file.

@@ -2,7 +2,7 @@
     >>> import tempfile
     >>> import shutil
 
-    >>> from xnose.util import ls_tree
+    >>> from nose.util import ls_tree
 
     >>> dir_path = tempfile.mkdtemp()
 

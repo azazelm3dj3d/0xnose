@@ -1,4 +1,4 @@
-from xnose import SkipTest
+from nose import SkipTest
 
 def setup():
     raise SkipTest("no thanks")

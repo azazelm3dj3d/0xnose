@@ -4,7 +4,7 @@ import os
 VERSION = '1.3.7'
 py_vers_tag = '-%s.%s' % sys.version_info[:2]
 
-test_dirs = ['functional_tests', 'unit_tests', os.path.join('doc','doc_tests'), 'xnose']
+test_dirs = ['functional_tests', 'unit_tests', os.path.join('doc','doc_tests'), 'nose']
 
 if sys.version_info >= (3,):
     try:
@@ -29,14 +29,14 @@ try:
         packages = find_packages(),
         entry_points = {
         'console_scripts': [
-            'xnosetests = xnose:run_exit',
-            'xnosetests%s = xnose:run_exit' % py_vers_tag,
+            'nosetests = nose:run_exit',
+            'nosetests%s = nose:run_exit' % py_vers_tag,
             ],
         'distutils.commands': [
-            ' xnosetests = xnose.commands:xnosetests',
+            ' nosetests = nose.commands:nosetests',
             ],
         },
-        test_suite = 'xnose.collector',
+        test_suite = 'nose.collector',
         )
     addl_args.update(extra)
 
@@ -71,38 +71,38 @@ try:
 except ImportError:
     from distutils.core import setup
     addl_args = dict(
-        packages = ['xnose', 'xnose.ext', 'xnose.plugins', 'xnose.sphinx',
-                    'xnose.tools'],
-        scripts = ['bin/xnosetests'],
+        packages = ['nose', 'nose.ext', 'nose.plugins', 'nose.sphinx',
+                    'nose.tools'],
+        scripts = ['bin/nosetests'],
         )
 
 setup(
-    name = 'xnose',
+    name = 'nose',
     version = VERSION,
     author = 'Jason Pellerin, azazelm3dj3d',
     author_email = 'jpellerin+nose@gmail.com, trevor@azazelm3dj3d.com',
-    description = ('xnose extends unittest to make testing easier'),
+    description = ('nose extends unittest to make testing easier'),
     long_description = \
-    """xnose extends the test loading and running features of unittest, making
+    """nose extends the test loading and running features of unittest, making
     it easier to write, find and run tests.
 
-    By default, xnose will run tests in files or directories under the current
+    By default, nose will run tests in files or directories under the current
     working directory whose names include "test" or "Test" at a word boundary
     (like "test_this" or "functional_test" or "TestClass" but not
     "libtest"). Test output is similar to that of unittest, but also includes
     captured stdout output from failing tests, for easy print-style debugging.
 
     These features, and many more, are customizable through the use of
-    plugins. Plugins included with xnose provide support for doctest, code
+    plugins. Plugins included with nose provide support for doctest, code
     coverage and profiling, flexible attribute-based test selection,
     output capture and more. More information about writing plugins may be
-    found on in the xnose API documentation, here:
-    http://readthedocs.org/docs/xnose/
+    found on in the nose API documentation, here:
+    http://readthedocs.org/docs/nose/
     """,
     license = 'GNU LGPL',
     keywords = 'test unittest doctest automatic discovery',
-    url = 'http://readthedocs.org/docs/xnose/',
-    data_files = [('man/man1', ['xnosetests.1'])],
+    url = 'http://readthedocs.org/docs/nose/',
+    data_files = [('man/man1', ['nosetests.1'])],
     package_data = {'': ['*.txt',
                          'examples/*.py',
                          'examples/*/*.py']},

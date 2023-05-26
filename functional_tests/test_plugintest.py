@@ -1,7 +1,7 @@
 
 import unittest, os
-from xnose.plugins import PluginTester, Plugin
-from xnose.tools import eq_
+from nose.plugins import PluginTester, Plugin
+from nose.tools import eq_
 from cStringIO import StringIO
 
 class StubPlugin(Plugin):

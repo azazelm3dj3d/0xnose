@@ -1,4 +1,4 @@
-from xnose.plugins import Plugin
+from nose.plugins import Plugin
 
 class ExamplePlugin(Plugin):
     pass

@@ -1,4 +1,4 @@
-from xnose.plugins.attrib import attr
+from nose.plugins.attrib import attr
 import unittest
 
 def test_one():

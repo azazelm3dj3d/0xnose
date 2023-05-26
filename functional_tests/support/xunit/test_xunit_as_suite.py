@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
-from xnose.exc import SkipTest
+from nose.exc import SkipTest
 import unittest
 
 class TestForXunit(unittest.TestCase):

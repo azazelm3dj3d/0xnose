@@ -3,8 +3,8 @@ import unittest
 
 class TestIssue006(unittest.TestCase):
     def test_load_nested_generator(self):
-        from xnose.config import Config
-        from xnose.loader import TestLoader
+        from nose.config import Config
+        from nose.loader import TestLoader
 
         where = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                              'support', 'issue006'))

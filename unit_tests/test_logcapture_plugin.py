@@ -1,9 +1,9 @@
 import sys
 from optparse import OptionParser
-from xnose.pyversion import UNICODE_STRINGS
-from xnose.config import Config
-from xnose.plugins.logcapture import LogCapture
-from xnose.tools import eq_
+from nose.pyversion import UNICODE_STRINGS
+from nose.config import Config
+from nose.plugins.logcapture import LogCapture
+from nose.tools import eq_
 import logging
 from logging import StreamHandler
 import unittest
@@ -136,9 +136,9 @@ class TestLogCapturePlugin(object):
         c.end()
 
         if py27:
-            expect = ["<class 'xnose.plugins.logcapture.MyMemoryHandler'>"]
+            expect = ["<class 'nose.plugins.logcapture.MyMemoryHandler'>"]
         else:
-            expect = ['xnose.plugins.logcapture.MyMemoryHandler']
+            expect = ['nose.plugins.logcapture.MyMemoryHandler']
         eq_([str(c.__class__) for c in logging.getLogger().handlers],
             expect)
         eq_([str(c.__class__) for c in logging.getLogger("dummy").handlers],

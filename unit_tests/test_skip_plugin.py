@@ -1,9 +1,9 @@
 import unittest
-from xnose.config import Config
-from xnose.plugins.skip import Skip, SkipTest
-from xnose.result import TextTestResult
+from nose.config import Config
+from nose.plugins.skip import Skip, SkipTest
+from nose.result import TextTestResult
 from StringIO import StringIO
-from xnose.result import _TextTestResult
+from nose.result import _TextTestResult
 from optparse import OptionParser
 try:
     # 2.7+

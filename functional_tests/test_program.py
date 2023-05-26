@@ -1,11 +1,11 @@
 import os
 import unittest
 from cStringIO import StringIO
-from xnose import SkipTest
-from xnose.core import TestProgram
-from xnose.config import Config
-from xnose.plugins.manager import DefaultPluginManager
-from xnose.result import _TextTestResult
+from nose import SkipTest
+from nose.core import TestProgram
+from nose.config import Config
+from nose.plugins.manager import DefaultPluginManager
+from nose.result import _TextTestResult
 
 here = os.path.dirname(__file__)
 support = os.path.join(here, 'support')

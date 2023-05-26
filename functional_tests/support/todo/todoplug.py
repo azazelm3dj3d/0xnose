@@ -1,4 +1,4 @@
-from xnose.plugins.errorclass import ErrorClass, ErrorClassPlugin
+from nose.plugins.errorclass import ErrorClass, ErrorClassPlugin
 
 class Todo(Exception):
     pass

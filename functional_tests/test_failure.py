@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from xnose.plugins import PluginTester
+from nose.plugins import PluginTester
 
 support = os.path.join(os.path.dirname(__file__), 'support', 'issue513')
 

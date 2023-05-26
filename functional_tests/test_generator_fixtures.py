@@ -1,4 +1,4 @@
-from xnose.tools import eq_
+from nose.tools import eq_
 called = []
 
 def outer_setup():

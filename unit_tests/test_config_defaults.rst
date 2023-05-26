@@ -2,11 +2,11 @@
     >>> import os
     >>> from cStringIO import StringIO
 
-    >>> import xnose.config
+    >>> import nose.config
 
 All commandline options to fall back to values configured in
 configuration files.  The configuration lives in a single section
-("xnosetests") in each configuration file.
+("nosetests") in each configuration file.
 
     >>> support = os.path.join(os.path.dirname(__file__), "support",
     ...                        "config_defaults")
@@ -23,12 +23,12 @@ configuration files.  The configuration lives in a single section
     ...     parser.add_option(
     ...         "--verbosity", action="store", dest="verbosity",
     ...         type="int")
-    ...     return xnose.config.ConfiguredDefaultsOptionParser(parser,
-    ...                                                       "xnosetests",
+    ...     return nose.config.ConfiguredDefaultsOptionParser(parser,
+    ...                                                       "nosetests",
     ...                                                       error)
 
     >>> def parse(args, config_files):
-    ...     argv = ["xnosetests"] + list(args)
+    ...     argv = ["nosetests"] + list(args)
     ...     return get_parser().parseArgsAndConfigFiles(argv, config_files)
 
 
@@ -65,14 +65,14 @@ Invalid values should cause an error specifically about configuration
 files (not about a commandline option)
 
     >>> options, arguments = parse([], StringIO("""\
-    ... [xnosetests]
+    ... [nosetests]
     ... verbosity = spam
     ... """))
     error: Error reading config file '<???>': option 'verbosity': invalid integer value: 'spam'
 
-Unrecognised option in xnosetests config section
+Unrecognised option in nosetests config section
 
-    >>> options, args = parse([], StringIO("[xnosetests]\nspam=eggs\n"))
+    >>> options, args = parse([], StringIO("[nosetests]\nspam=eggs\n"))
     error: Error reading config file '<???>': no such option 'spam'
 
 If there were multiple config files, the error message tells us which
@@ -139,7 +139,7 @@ Missing config files don't deserve an error or warning
     {'verbosity': 1}
 
 
-The same goes for missing config file section ("xnosetests")
+The same goes for missing config file section ("nosetests")
 
     >>> options, args = parse([], StringIO("[spam]\nfoo=bar\n"))
     >>> print options.__dict__

@@ -2,8 +2,8 @@ Minimal plugin
 --------------
 
 Plugins work as long as they implement the minimal interface required
-by xnose.plugins.base. They do not have to derive from
-xnose.plugins.Plugin.
+by nose.plugins.base. They do not have to derive from
+nose.plugins.Plugin.
 
     >>> class NullPlugin(object):
     ...
@@ -17,7 +17,7 @@ xnose.plugins.Plugin.
     ...     def configure(self, options, conf):
     ...         pass
     >>> import unittest
-    >>> from xnose.plugins.plugintest import run_buffered as run
+    >>> from nose.plugins.plugintest import run_buffered as run
     >>> run(suite=unittest.TestSuite(tests=[]),
     ...     plugins=[NullPlugin()]) # doctest: +REPORT_NDIFF
     ----------------------------------------------------------------------
@@ -25,11 +25,11 @@ xnose.plugins.Plugin.
     <BLANKLINE>
     OK
 
-Plugins can derive from xnose.plugins.base and do nothing except set a
+Plugins can derive from nose.plugins.base and do nothing except set a
 name.
 
     >>> import os
-    >>> from xnose.plugins import Plugin
+    >>> from nose.plugins import Plugin
     >>> class DerivedNullPlugin(Plugin):
     ...
     ...     name = "derived-null"

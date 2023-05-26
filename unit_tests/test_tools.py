@@ -1,7 +1,7 @@
 import sys
 import time
 import unittest
-from xnose.tools import *
+from nose.tools import *
 
 compat_24 =  sys.version_info >= (2, 4)
 
@@ -48,7 +48,7 @@ class TestTools(unittest.TestCase):
         assert '__unittest' not in istest.func_globals
 
     def test_raises(self):
-        from xnose.case import FunctionTestCase
+        from nose.case import FunctionTestCase
 
         def raise_typeerror():
             raise TypeError("foo")
@@ -117,7 +117,7 @@ class TestTools(unittest.TestCase):
         assert f2.teardown == 'teardown'
 
     def test_nested_decorators(self):
-        from xnose.tools import raises, timed, with_setup
+        from nose.tools import raises, timed, with_setup
 
         def test():
             pass
@@ -132,8 +132,8 @@ class TestTools(unittest.TestCase):
         assert test.teardown == foo
 
     def test_decorator_func_sorting(self):
-        from xnose.tools import raises, timed, with_setup
-        from xnose.util import func_lineno
+        from nose.tools import raises, timed, with_setup
+        from nose.util import func_lineno
 
         def test1():
             pass
@@ -160,8 +160,8 @@ class TestTools(unittest.TestCase):
         self.assertEqual(func_lineno(test3), test3_pos)
 
     def test_testcase_funcs(self):
-        import xnose.tools
-        tc_asserts = [ at for at in dir(xnose.tools) if at.startswith('assert_') ]
+        import nose.tools
+        tc_asserts = [ at for at in dir(nose.tools) if at.startswith('assert_') ]
         print(tc_asserts)
 
         # FIXME: not sure which of these are in all supported
@@ -171,8 +171,8 @@ class TestTools(unittest.TestCase):
             assert 'assert_true' in tc_asserts
 
     def test_multiple_with_setup(self):
-        from xnose.tools import with_setup
-        from xnose.case import FunctionTestCase
+        from nose.tools import with_setup
+        from nose.case import FunctionTestCase
         from unittest import TestResult
 
         called = []

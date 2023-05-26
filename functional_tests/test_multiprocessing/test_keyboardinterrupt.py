@@ -1,18 +1,18 @@
-from xnose.exc import SkipTest
+from nose.exc import SkipTest
 from subprocess import Popen,PIPE
 import os
 import sys
 from time import sleep
 import signal
 
-import xnose
+import nose
 
 support = os.path.join(os.path.dirname(__file__), 'support')
 
 PYTHONPATH = os.environ['PYTHONPATH'] if 'PYTHONPATH' in os.environ else ''
 
 def setup():
-    nose_parent_dir = os.path.normpath(os.path.join(os.path.abspath(os.path.dirname(xnose.__file__)),'..'))
+    nose_parent_dir = os.path.normpath(os.path.join(os.path.abspath(os.path.dirname(nose.__file__)),'..'))
     paths = [nose_parent_dir]
     if PYTHONPATH:
         paths.append(PYTHONPATH)

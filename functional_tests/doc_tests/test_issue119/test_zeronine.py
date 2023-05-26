@@ -1,7 +1,7 @@
 import os, sys, unittest
-from xnose.plugins import Plugin
-from xnose.plugins.plugintest import PluginTester
-from xnose.plugins.manager import ZeroNinePlugin
+from nose.plugins import Plugin
+from nose.plugins.plugintest import PluginTester
+from nose.plugins.manager import ZeroNinePlugin
 
 here = os.path.abspath(os.path.dirname(__file__))
 

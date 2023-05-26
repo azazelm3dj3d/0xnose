@@ -1,6 +1,6 @@
 """This test will fail if generators bind too early."""
     
-from xnose.tools import eq_
+from nose.tools import eq_
 
 def test1():
 
