@@ -58,10 +58,12 @@ from nose.plugins.base import Plugin
 from nose.suite import ContextList
 from nose.util import anyp, getpackage, test_address, resolve_name, \
      src, tolist, isproperty
+
 try:
-    from cStringIO import StringIO
-except ImportError:
     from StringIO import StringIO
+except ImportError:
+    from io import StringIO
+
 import sys
 import __builtin__ as builtin_mod
 
@@ -275,7 +277,7 @@ class Doctest(Plugin):
                 try:
                     fixture_context = __import__(
                         fixt_mod, globals(), locals(), ["nop"])
-                except ImportError, e:
+                except ImportError as e:
                     log.debug(
                         "Could not import %s: %s (%s)", fixt_mod, e, sys.path)
                 log.debug("Fixture module %s resolved to %s",
@@ -412,11 +414,13 @@ class DocTestCase(doctest.DocTestCase):
     def _displayhook(self, value):
         if value is None:
             return
+        
         setattr(builtin_mod, self._result_var,  value)
-        print repr(value)
+        print(repr(value))
 
     def tearDown(self):
         super(DocTestCase, self).tearDown()
+        
         if self._result_var is not None:
             sys.displayhook = self._old_displayhook
             delattr(builtin_mod, self._result_var)
@@ -445,11 +449,13 @@ class DocFileCase(doctest.DocFileCase):
     def _displayhook(self, value):
         if value is None:
             return
+        
         setattr(builtin_mod, self._result_var, value)
-        print repr(value)
+        print(repr(value))
 
     def tearDown(self):
         super(DocFileCase, self).tearDown()
+        
         if self._result_var is not None:
             sys.displayhook = self._old_displayhook
             delattr(builtin_mod, self._result_var)

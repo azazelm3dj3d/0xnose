@@ -107,7 +107,7 @@ class TestDeprecatedPlugin(unittest.TestCase):
 
         res.printErrors()
         out = stream.getvalue()
-        print out
+        print(out)
         assert out
 
         assert ' ... DEPRECATED' in out

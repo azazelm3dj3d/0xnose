@@ -16,12 +16,12 @@ __all__ = ['make_instancemethod', 'cmp_to_key', 'sort_list', 'ClassType',
 # In Python 3.x, all strings are unicode (the call to 'unicode()' in the 2.x
 # source will be replaced with 'str()' when running 2to3, so this test will
 # then become true)
-UNICODE_STRINGS = (type(unicode()) == type(str()))
+UNICODE_STRINGS = type(str())
 
 if sys.version_info[:2] < (3, 0):
     def force_unicode(s, encoding='UTF-8'):
         try:
-            s = unicode(s)
+            s = str(s)
         except UnicodeDecodeError:
             s = str(s).decode(encoding, 'replace')
 

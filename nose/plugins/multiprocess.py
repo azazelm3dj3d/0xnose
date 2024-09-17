@@ -110,17 +110,20 @@ from nose.pyversion import bytes_
 from nose.result import TextTestResult
 from nose.suite import ContextSuite
 from nose.util import test_address
+
 try:
     # 2.7+
     from unittest.runner import _WritelnDecorator
 except ImportError:
     from unittest import _WritelnDecorator
+
 from Queue import Empty
 from warnings import warn
+
 try:
-    from cStringIO import StringIO
+  from StringIO import StringIO
 except ImportError:
-    import StringIO
+  from io import StringIO
 
 # this is a list of plugin classes that will be checked for and created inside 
 # each worker process
@@ -478,7 +481,7 @@ class MultiProcessTestRunner(TextTestRunner):
                                 self.config.multiprocess_timeout-timeprocessing)
             log.debug("Completed %s tasks (%s remain)", len(completed), len(tasks))
 
-        except (KeyboardInterrupt, SystemExit), e:
+        except (KeyboardInterrupt, SystemExit) as e:
             log.info('parent received ctrl-c when waiting for test results')
             thrownError = e
             #resultQueue.get(False)

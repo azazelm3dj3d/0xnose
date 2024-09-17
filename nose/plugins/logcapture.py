@@ -23,9 +23,9 @@ from nose.plugins.base import Plugin
 from nose.util import anyp, ln, safe_str
 
 try:
-    from cStringIO import StringIO
-except ImportError:
     from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 log = logging.getLogger(__name__)
 
@@ -247,6 +247,4 @@ class LogCapture(Plugin):
         return map(safe_str, self.handler.buffer)
 
     def addCaptureToErr(self, ev, records):
-        return '\n'.join([safe_str(ev), ln('>> begin captured logging <<')] + \
-                          records + \
-                          [ln('>> end captured logging <<')])
+        return f"\n{ln('>> begin captured logging <<')}\n{safe_str(ev)}\n{records}\n{ln('>> end captured logging <<')}"

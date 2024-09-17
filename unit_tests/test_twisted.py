@@ -1,7 +1,8 @@
+import sys
 from nose.exc import SkipTest
 from nose.tools import *
 from nose.twistedtools import *
-try:    
+try:
     from twisted.internet.defer import Deferred
     from twisted.internet.error import DNSLookupError
 except ImportError:
@@ -29,7 +30,8 @@ test_resolve = deferred()(test_resolve)
 #@raises(TypeError)
 #@deferred()
 def test_raises_bad_return():
-    print reactor
+    print(reactor)
+        
     reactor.resolve("www.python.org")
 test_raises_bad_return = raises(TypeError)(deferred()(test_raises_bad_return))
 

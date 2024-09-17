@@ -1,5 +1,4 @@
-import os
-import unittest
+import os, sys, unittest
 from nose.plugins import Plugin
 from nose.plugins.plugintest import PluginTester
 from nose.plugins.manager import ZeroNinePlugin
@@ -18,9 +17,7 @@ class TestEmptyPlugin(PluginTester, unittest.TestCase):
     suitepath = os.path.join(here, 'empty_plugin.rst')
 
     def test_empty_zero_nine_does_not_crash(self):
-        print self.output
+        print(self.output)
+        
         assert "'EmptyPlugin' object has no attribute 'loadTestsFromPath'" \
             not in self.output
-
-    
-

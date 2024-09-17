@@ -100,9 +100,9 @@ import sys
 from warnings import warn
 
 try:
-    from cStringIO import StringIO
-except ImportError:
     from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 __all__ = ['PluginTester', 'run']
 
@@ -403,8 +403,10 @@ def run(*arg, **kw):
         if restore:
             sys.stderr = stderr
             sys.stdout = stdout
+    
     out = buffer.getvalue()
-    print munge_nose_output_for_doctest(out)
+    
+    print(munge_nose_output_for_doctest(out))
 
 
 def run_buffered(*arg, **kw):

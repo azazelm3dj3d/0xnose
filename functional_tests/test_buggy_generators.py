@@ -1,9 +1,14 @@
 import os
 import unittest
-from cStringIO import StringIO
+# from cStringIO import StringIO
 from nose.core import TestProgram
 from nose.config import Config
 from nose.result import _TextTestResult
+
+try:
+  from StringIO import StringIO
+except ImportError:
+  from io import StringIO
 
 here = os.path.dirname(__file__)
 support = os.path.join(here, 'support')
@@ -26,10 +31,11 @@ class TestBuggyGenerators(unittest.TestCase):
             testRunner=runner,
             config=Config(),
             exit=False)
+        
         res = runner.result
-        print stream.getvalue()
-        self.assertEqual(res.testsRun, 12,
-                         "Expected to run 12 tests, ran %s" % res.testsRun)
+        print(stream.getvalue())
+
+        self.assertEqual(res.testsRun, 12, "Expected to run 12 tests, ran %s" % res.testsRun)
         assert not res.wasSuccessful()
         assert len(res.errors) == 4
         assert not res.failures

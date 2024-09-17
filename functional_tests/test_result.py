@@ -23,7 +23,7 @@ class TestResultSummary(unittest.TestCase):
         TestProgram(argv=['t', '--with-todo', pkpath],
                     config=config, exit=False)
         out = stream.getvalue()
-        print out
+        print(out)
         self.assert_('FAILED (TODO=1)' in out)
 
 

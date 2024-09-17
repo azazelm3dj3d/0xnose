@@ -85,7 +85,7 @@ class TestSkipPlugin(unittest.TestCase):
 
         res.printErrors()
         out = stream.getvalue()
-        print out
+        print(out)
         assert out
         assert out.strip() == "S"
         assert res.wasSuccessful()
@@ -107,7 +107,7 @@ class TestSkipPlugin(unittest.TestCase):
 
         res.printErrors()
         out = stream.getvalue()
-        print out
+        print(out)
         assert out
 
         assert ' ... SKIP' in out

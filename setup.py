@@ -79,8 +79,8 @@ except ImportError:
 setup(
     name = 'nose',
     version = VERSION,
-    author = 'Jason Pellerin',
-    author_email = 'jpellerin+nose@gmail.com',
+    author = 'Jason Pellerin, azazelm3dj3d',
+    author_email = 'jpellerin+nose@gmail.com, trevor@azazelm3dj3d.com',
     description = ('nose extends unittest to make testing easier'),
     long_description = \
     """nose extends the test loading and running features of unittest, making
@@ -98,10 +98,6 @@ setup(
     output capture and more. More information about writing plugins may be
     found on in the nose API documentation, here:
     http://readthedocs.org/docs/nose/
-
-    If you have recently reported a bug marked as fixed, or have a craving for
-    the very latest, you may want the development version instead:
-    https://github.com/nose-devs/nose/tarball/master#egg=nose-dev
     """,
     license = 'GNU LGPL',
     keywords = 'test unittest doctest automatic discovery',

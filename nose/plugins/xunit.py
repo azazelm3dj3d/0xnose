@@ -116,7 +116,7 @@ def exc_message(exc_info):
             result = str(exc)
         except UnicodeEncodeError:
             try:
-                result = unicode(exc)
+                result = str(exc)
             except UnicodeError:
                 # Fallback to args as neither str nor
                 # unicode(Exception(u'\xe6')) work in Python < 2.6

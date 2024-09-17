@@ -457,7 +457,7 @@ class DocTest:
         Create a new DocTest containing the given examples.  The
         DocTest's globals are initialized with a copy of `globs`.
         """
-        assert not isinstance(examples, basestring), \
+        assert not isinstance(examples, str), \
                "DocTest no longer accepts str; use DocTestParser instead"
         self.examples = examples
         self.docstring = docstring
@@ -875,7 +875,7 @@ class DocTestFinder:
         add them to `tests`.
         """
         if self._verbose:
-            print 'Finding tests in %s' % name
+            print('Finding tests in %s' % name)
 
         # If we've already processed this object, then ignore it.
         if id(obj) in seen:
@@ -903,13 +903,13 @@ class DocTestFinder:
         # Look for tests in a module's __test__ dictionary.
         if inspect.ismodule(obj) and self._recurse:
             for valname, val in getattr(obj, '__test__', {}).items():
-                if not isinstance(valname, basestring):
+                if not isinstance(valname, str):
                     raise ValueError("DocTestFinder.find: __test__ keys "
                                      "must be strings: %r" %
                                      (type(valname),))
                 if not (inspect.isfunction(val) or inspect.isclass(val) or
                         inspect.ismethod(val) or inspect.ismodule(val) or
-                        isinstance(val, basestring)):
+                        isinstance(val, str)):
                     raise ValueError("DocTestFinder.find: __test__ values "
                                      "must be strings, functions, methods, "
                                      "classes, or modules: %r" %
@@ -945,7 +945,7 @@ class DocTestFinder:
         """
         # Extract the object's docstring.  If it doesn't have one,
         # then return None (no test for this object).
-        if isinstance(obj, basestring):
+        if isinstance(obj, str):
             docstring = obj
         else:
             try:
@@ -953,7 +953,7 @@ class DocTestFinder:
                     docstring = ''
                 else:
                     docstring = obj.__doc__
-                    if not isinstance(docstring, basestring):
+                    if not isinstance(docstring, str):
                         docstring = str(docstring)
             except (TypeError, AttributeError):
                 docstring = ''
@@ -1354,28 +1354,28 @@ class DocTestRunner:
                 failed.append(x)
         if verbose:
             if notests:
-                print len(notests), "items had no tests:"
+                print(len(notests), "items had no tests:")
                 notests.sort()
                 for thing in notests:
-                    print "   ", thing
+                    print("   ", thing)
             if passed:
-                print len(passed), "items passed all tests:"
+                print(len(passed), "items passed all tests:")
                 passed.sort()
                 for thing, count in passed:
-                    print " %3d tests in %s" % (count, thing)
+                    print(" %3d tests in %s" % (count, thing))
         if failed:
-            print self.DIVIDER
-            print len(failed), "items had failures:"
+            print(self.DIVIDER)
+            print(len(failed), "items had failures:")
             failed.sort()
             for thing, (f, t) in failed:
-                print " %3d of %3d in %s" % (f, t, thing)
+                print(" %3d of %3d in %s" % (f, t, thing))
         if verbose:
-            print totalt, "tests in", len(self._name2ft), "items."
-            print totalt - totalf, "passed and", totalf, "failed."
+            print(totalt, "tests in", len(self._name2ft), "items.")
+            print(totalt - totalf, "passed and", totalf, "failed.")
         if totalf:
-            print "***Test Failed***", totalf, "failures."
+            print("***Test Failed***", totalf, "failures.")
         elif verbose:
-            print "Test passed."
+            print("Test passed.")
         return totalf, totalt
 
     #/////////////////////////////////////////////////////////////////
@@ -1385,8 +1385,9 @@ class DocTestRunner:
         d = self._name2ft
         for name, (f, t) in other._name2ft.items():
             if name in d:
-                print "*** DocTestRunner.merge: '" + name + "' in both" \
-                    " testers; summing outcomes."
+                print("*** DocTestRunner.merge: '" + name + "' in both" \
+                    " testers; summing outcomes.")
+
                 f2, t2 = d[name]
                 f = f + f2
                 t = t + t2
@@ -1875,10 +1876,12 @@ class Tester:
     def runstring(self, s, name):
         test = DocTestParser().get_doctest(s, self.globs, name, None, None)
         if self.verbose:
-            print "Running string", name
+            print("Running string", name)
+
         (f,t) = self.testrunner.run(test)
         if self.verbose:
-            print f, "of", t, "examples failed in string", name
+            print(f, "of", t, "examples failed in string", name)
+                
         return (f,t)
 
     def rundoc(self, object, name=None, module=None):
@@ -2247,7 +2250,8 @@ def debug_script(src, pm=False, globs=None):
             try:
                 execfile(srcfilename, globs, globs)
             except:
-                print sys.exc_info()[1]
+                print(sys.exc_info()[1])
+
                 pdb.post_mortem(sys.exc_info()[2])
         else:
             # Note that %r is vital here.  '%s' instead can, e.g., cause

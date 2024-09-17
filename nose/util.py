@@ -654,7 +654,7 @@ def safe_str(val, encoding='utf-8'):
         if isinstance(val, Exception):
             return ' '.join([safe_str(arg, encoding)
                              for arg in val])
-        return unicode(val).encode(encoding)
+        return str(val).encode(encoding)
 
 
 def is_executable(file):

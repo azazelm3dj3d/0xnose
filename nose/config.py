@@ -3,7 +3,7 @@ import optparse
 import os
 import re
 import sys
-import ConfigParser
+import configparser
 from optparse import OptionParser
 from nose.util import absdir, tolist
 from nose.plugins.manager import NoPlugins
@@ -62,24 +62,24 @@ class ConfiguredDefaultsOptionParser(object):
     def _readFromFilenames(self, filenames):
         config = []
         for filename in filenames:
-            cfg = ConfigParser.RawConfigParser()
+            cfg = configparser.RawConfigParser()
             try:
                 cfg.read(filename)
-            except ConfigParser.Error, exc:
+            except configparser.Error as exc:
                 raise ConfigError("Error reading config file %r: %s" %
                                   (filename, str(exc)))
             config.extend(self._configTuples(cfg, filename))
         return config
 
     def _readFromFileObject(self, fh):
-        cfg = ConfigParser.RawConfigParser()
+        cfg = configparser.RawConfigParser()
         try:
             filename = fh.name
         except AttributeError:
             filename = '<???>'
         try:
             cfg.readfp(fh)
-        except ConfigParser.Error, exc:
+        except configparser.Error as exc:
             raise ConfigError("Error reading config file %r: %s" %
                               (filename, str(exc)))
         return self._configTuples(cfg, filename)
@@ -89,7 +89,7 @@ class ConfiguredDefaultsOptionParser(object):
             config_files.readline
         except AttributeError:
             filename_or_filenames = config_files
-            if isinstance(filename_or_filenames, basestring):
+            if isinstance(filename_or_filenames, str):
                 filenames = [filename_or_filenames]
             else:
                 filenames = filename_or_filenames
@@ -113,12 +113,12 @@ class ConfiguredDefaultsOptionParser(object):
                 continue
             try:
                 self._processConfigValue(name, value, values, parser)
-            except NoSuchOptionError, exc:
+            except NoSuchOptionError as exc:
                 self._file_error(
                     "Error reading config file %r: "
                     "no such option %r" % (filename, exc.name),
                     name=name, filename=filename)
-            except optparse.OptionValueError, exc:
+            except optparse.OptionValueError as exc:
                 msg = str(exc).replace('--' + name, repr(name), 1)
                 self._file_error("Error reading config file %r: "
                                  "%s" % (filename, msg),
@@ -128,12 +128,12 @@ class ConfiguredDefaultsOptionParser(object):
         values = self._parser.get_default_values()
         try:
             config = self._readConfiguration(config_files)
-        except ConfigError, exc:
+        except ConfigError as exc:
             self._error(str(exc))
         else:
             try:
                 self._applyConfigurationToValues(self._parser, config, values)
-            except ConfigError, exc:
+            except ConfigError as exc:
                 self._error(str(exc))
         return self._parser.parse_args(args, values)
 

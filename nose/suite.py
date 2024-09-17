@@ -16,6 +16,10 @@ from nose.case import Test
 from nose.config import Config
 from nose.proxy import ResultProxyFactory
 from nose.util import isclass, resolve_name, try_run
+import collections
+
+if sys.version_info[:2] > (3, 10):
+    collections.Callable = collections.abc.Callable
 
 if sys.platform == 'cli':
     if sys.version_info[:2] < (2, 6):

@@ -125,14 +125,17 @@ class TextTestResult(_TextTestResult):
 
         summary = {}
         eckeys = self.errorClasses.keys()
+        
         for cls in eckeys:
             storage, label, isfail = self.errorClasses[cls]
             count = len(storage)
             if not count:
                 continue
             summary[label] = count
+        
         if len(self.failures):
             summary['failures'] = len(self.failures)
+        
         if len(self.errors):
             summary['errors'] = len(self.errors)
 
@@ -140,9 +143,11 @@ class TextTestResult(_TextTestResult):
             write("FAILED")
         else:
             write("OK")
+        
         items = summary.items()
+        
         if items:
-            items.sort()
+            sorted(items)
             write(" (")
             write(", ".join(["%s=%s" % (label, count) for
                              label, count in items]))

@@ -16,9 +16,9 @@ class TestFailureDetailWorks(PluginTester, unittest.TestCase):
 
     def test_assert_info_in_output(self):
         print
-        print '!' * 70
-        print str(self.output)
-        print '!' * 70
+        print('!' * 70)
+        print(str(self.output))
+        print('!' * 70)
         print
         assert '>>  assert 4 == 2' in str(self.output)
 
@@ -31,9 +31,9 @@ class TestFailureDetailWorksWhenChained(PluginTester, unittest.TestCase):
     def test_assert_info_and_capt_stdout_in_output(self):
         out = str(self.output)
         print
-        print 'x' * 70
-        print out
-        print 'x' * 70
+        print('x' * 70)
+        print(out)
+        print('x' * 70)
         print
         
         assert '>>  assert 4 == 2' in out, \

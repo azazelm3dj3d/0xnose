@@ -166,9 +166,9 @@ class TestWithDoctest_2(PluginTester, unittest.TestCase):
         return None
 
     def test_load_ids_doctest(self):
-        print '*' * 70
-        print str(self.output)
-        print '*' * 70
+        print('*' * 70)
+        print(str(self.output))
+        print('*' * 70)
 
         assert 'Doctest: exm.add_one ... FAIL' in self.output
         
@@ -188,9 +188,9 @@ class TestWithDoctestFileTests_1(PluginTester, unittest.TestCase):
     suitepath = os.path.join(support, 'dtt', 'docs')
 
     def test_docfile_tests_get_ids(self):
-        print '>' * 70
-        print str(self.output)
-        print '>' * 70
+        print('>' * 70)
+        print(str(self.output))
+        print('>' * 70)
 
         last = None
         for line in self.output:
@@ -234,9 +234,9 @@ class TestWithDoctestFileTests_2(PluginTester, unittest.TestCase):
         return None
 
     def test_load_from_name_id_docfile_test(self):
-        print '*' * 70
-        print str(self.output)
-        print '*' * 70
+        print('*' * 70)
+        print(str(self.output))
+        print('*' * 70)
 
         assert 'Doctest: errdoc.txt ... FAIL' in self.output
         

@@ -22,9 +22,9 @@ class TestStringException(PluginTester, unittest.TestCase):
                            "version of Python")
 
         print
-        print '!' * 70
-        print str(self.output)
-        print '!' * 70
+        print('!' * 70)
+        print(str(self.output))
+        print('!' * 70)
         print
         assert 'raise "string exception"' in str(self.output)
         assert 'raise "string exception in setup"' in str(self.output)

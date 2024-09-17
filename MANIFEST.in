@@ -1,8 +1,5 @@
 include AUTHORS
-include CHANGELOG
-include NEWS
-include README.txt
-include lgpl.txt
+include README.md
 include nosetests.1
 include install-rpm.sh
 include bin/nosetests

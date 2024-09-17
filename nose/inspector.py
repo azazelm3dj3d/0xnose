@@ -38,7 +38,7 @@ def inspect_traceback(tb):
         try:
             for tok in tokenize.generate_tokens(src.readline):
                 exp(*tok)
-        except tokenize.TokenError, e:
+        except tokenize.TokenError as e:
             # this can happen if our inspectable region happens to butt up
             # against the end of a construct like a docstring with the closing
             # """ on separate line

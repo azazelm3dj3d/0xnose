@@ -28,27 +28,27 @@ class ResultProxy(proxy.ResultProxy):
         self.assertMyTest(test)
         self.called.append(('beforeTest', test))
     def startTest(self, test):
-        print "proxy startTest"
+        print("proxy startTest")
         self.assertMyTest(test)
         self.called.append(('startTest', test))
     def stopTest(self, test):
-        print "proxy stopTest"
+        print("proxy stopTest")
         self.assertMyTest(test)
         self.called.append(('stopTest', test))
     def addDeprecated(self, test, err):
-        print "proxy addDeprecated"
+        print("proxy addDeprecated")
         self.assertMyTest(test)
         self.called.append(('addDeprecated', test, err))
     def addError(self, test, err):
-        print "proxy addError"
+        print("proxy addError")
         self.assertMyTest(test)
         self.called.append(('addError', test, err))
     def addFailure(self, test, err):
-        print "proxy addFailure"
+        print("proxy addFailure")
         self.assertMyTest(test)
         self.called.append(('addFailure', test, err))
     def addSkip(self, test, err):
-        print "proxy addSkip"
+        print("proxy addSkip")
         self.assertMyTest(test)
         self.called.append(('addSkip', test, err))
     def addSuccess(self, test):

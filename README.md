@@ -1,6 +1,12 @@
+# nose
 
-Basic usage
-***********
+This is a forked repository of [nose](https://github.com/nose-devs/nose). This fork was created to offer improved functionality and bug fixes missing in the original project, which is now deprecated. The primary goal of this fork is to build a compatible testing environment for Python 3.x based on the Nose project.
+
+If you're starting a new project, I recommend using [Nose2](https://github.com/nose-devs/nose2) for a more stable and dedicated environment. The purpose of nose is to offer support for current development projects running Nose as their testing infrastructure, but unable to run a full suite of tests due to compatibility issues with newer versions of Python.
+
+NOTE: This project is still a heavy WIP. While the tests _may_ pass, I wouldn't recommend using this module until a release is available. The results may be inaccurate or indirectly modified.
+
+## Basic usage
 
 Use the nosetests script (after installation by setuptools):
 
@@ -44,8 +50,7 @@ about how to control which tests nose runs, which plugins are loaded,
 and the test output.
 
 
-Extended usage
-==============
+## Extended usage
 
 nose collects tests automatically from python source files,
 directories and packages found in its working directory (which
@@ -72,8 +77,7 @@ from such files, remove their executable bit or use the --exe flag
 (see 'Options' section below).
 
 
-Selecting Tests
----------------
+## Selecting Tests
 
 To specify which tests to run, pass test names on the command line:
 
@@ -110,8 +114,8 @@ as output capture and assert introspection) detailed in the options
 below.
 
 
-Configuration
--------------
+## Configuration
+
 
 In addition to passing command-line options, you may also put
 configuration options in your project's *setup.cfg* file, or a .noserc
@@ -130,8 +134,8 @@ options combined. You can override the standard config file loading
 with the "-c" option.
 
 
-Using Plugins
--------------
+## Using Plugins
+
 
 There are numerous nose plugins available via easy_install and
 elsewhere. To use a plugin, just install it. The plugin will add
@@ -148,8 +152,8 @@ specify a list of plugins to use by passing a list of plugins with the
 plugins keyword argument.
 
 
-0.9 plugins
------------
+## 0.9 plugins
+
 
 nose 1.0 can use SOME plugins that were written for nose 0.9. The
 default plugin manager inserts a compatibility wrapper around 0.9
@@ -163,14 +167,13 @@ plugin is trying to find out if the test is an instance of a class
 that no longer exists.
 
 
-0.10 and 0.11 plugins
----------------------
+## 0.10 and 0.11 plugins
 
 All plugins written for nose 0.10 and 0.11 should work with nose 1.0.
 
 
-Options
--------
+## Options
+
 
 -V, --version
 
@@ -549,3 +552,12 @@ Options
 
    Enable collect-only:  Collect and output test names only, don't run
    any tests.  [COLLECT_ONLY]
+
+## brp-compress
+
+On some platforms, brp-compress zips man pages without distutils knowing about it. This results in an error when building an rpm for nose. The rpm build will report either that an unpackaged file was found, or that an expected package file was not found.
+
+If you see such an error when using the bdist_rpm command, uncomment the
+'install_script' line in the '[bdist_rpm]' section of nose's setup.cfg
+file. This should fix the problem by fixing the man page filename in the
+generated rpm spec file.

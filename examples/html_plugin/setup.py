@@ -8,9 +8,9 @@ except ImportError:
 from setuptools import setup
 
 setup(
-    name='Example html output plugin',
-    version='0.1',
-    author='Jason Pellerin',
+    name = 'Example html output plugin',
+    version = '0.1',
+    author = 'Jason Pellerin',
     author_email = 'jpellerin+nose@gmail.com',
     description = 'Example nose html output plugin',
     license = 'GNU LGPL',

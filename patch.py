@@ -25,10 +25,8 @@ from logging import debug, info, warning
 import sys
 
 try:
-  # cStringIO doesn't support unicode in 2.5
   from StringIO import StringIO
 except ImportError:
-  # StringIO has been renamed to 'io' in 3.x
   from io import StringIO
 
 from os.path import exists, isfile, abspath

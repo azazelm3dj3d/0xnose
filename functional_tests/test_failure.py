@@ -16,9 +16,9 @@ class TestPrintedTraceback(PluginTester, unittest.TestCase):
 
     def test_correct_exception_raised(self):
         print
-        print '!' * 70
-        print str(self.output)
-        print '!' * 70
+        print('!' * 70)
+        print(str(self.output))
+        print('!' * 70)
         print
 
         # Look for the line in the traceback causing the failure

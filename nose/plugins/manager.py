@@ -63,11 +63,11 @@ try:
     import cPickle as pickle
 except:
     import pickle
-try:
-    from cStringIO import StringIO
-except:
-    from StringIO import StringIO
 
+try:
+  from StringIO import StringIO
+except ImportError:
+  from io import StringIO
 
 __all__ = ['DefaultPluginManager', 'PluginManager', 'EntryPointPluginManager',
            'BuiltinPluginManager', 'RestrictedPluginManager']
@@ -387,7 +387,7 @@ class EntryPointPluginManager(PluginManager):
                     plugcls = ep.load()
                 except KeyboardInterrupt:
                     raise
-                except Exception, e:
+                except Exception as e:
                     # never want a plugin load to kill the test run
                     # but we can't log here because the logger is not yet
                     # configured

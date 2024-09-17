@@ -11,7 +11,7 @@ class TestBug105(unittest.TestCase):
 
         l = TestLoader()
         testmod = l.loadTestsFromDir(where).next()
-        print testmod
+        print(testmod)
         testmod.setUp()
 
         def fix(t):
@@ -21,7 +21,7 @@ class TestBug105(unittest.TestCase):
             return s
         
         tests = map(fix, testmod)
-        print tests
+        print(tests)
         self.assertEqual(tests, ['tests.test_z', 'tests.test_a',
                                  'tests.test_dz', 'tests.test_mdz',
                                  'tests.test_b'])
